@@ -1,0 +1,117 @@
+{
+  "header": {
+    "body": "Full-Stack Developer"
+  },
+  "home": {
+    "body": "Merhaba, ben Utku Toygun Bektaşoğlu. 27 Aralık 2022'de yazılım öğrenme yolculuğuma başladım. İşletme mezunu olmama rağmen, web teknolojilerine olan ilgim her zaman yoğundu. Web sitelerinin nasıl çalıştığı, butonlara tıklandığında arka planda neler olduğu ve internet dünyasının dinamik yapısı beni hep meraklandırdı. Bu yüzden bu alanda kendimi geliştirmeye karar verdim. O zamandan beri yazılım öğrenme tutkumu sürdürüyorum ve sürekli olarak kendimi yeni teknolojilerle güncelliyorum. Web'in gizemli dünyasını keşfetmek ve bu alanda yetkinlik kazanmak beni her geçen gün daha da motive ediyor."
+  },
+  "webTechnologies": {
+    "html": {
+      "header": "HTML",
+      "body": "Temiz ve semantik HTML yapısına önem veririm.",
+      "featured": "HTML ile daha iyi performans ve erişilebilirlik sağlayan yapılar oluşturarak kullanıcı deneyimini en üst düzeye çıkarmayı hedefliyorum. Daha fazla SEO dostu sayfalar ve web standartlarına uygun projeler geliştirerek, modern web uygulamalarında mükemmelliğe ulaşmak istiyorum."
+    },
+    "javascript": {
+      "header": "JavaScript",
+      "body": "JavaScript ile gerçek zamanlı bir sohbet uygulaması geliştirdim. Websockets kullanarak kullanıcıların anında mesaj gönderebilmesini sağladım.",
+      "featured": "JavaScript'te asenkron işlemler ve daha karmaşık veri yapılarını yönetme becerilerimi geliştirmeye odaklanıyorum. Modern JavaScript frameworkleri ve kütüphanelerle daha sağlam, performanslı ve ölçeklenebilir web uygulamaları inşa etmeyi hedefliyorum."
+    },
+    "typescript": {
+      "header": "TypeScript",
+      "body": "Kodun daha güvenli ve ölçeklenebilir olmasını sağlayan TypeScript, büyük projelerde hata riskini en aza indiriyor. Bu yüzden projelerimde tercih ediyorum.",
+      "featured": "TypeScript ile büyük ve karmaşık projelerde daha verimli kod yazmayı ve ekip çalışmalarında kod kalitesini artırmayı hedefliyorum. Tip güvenliği ve gelişmiş tip sistemleri ile daha modüler ve sürdürülebilir projeler oluşturmayı planlıyorum."
+    },
+    "css": {
+      "header": "CSS",
+      "body": "Minimalist ve kullanıcı dostu tasarımlar yaratmayı seviyorum. CSS ile modern UI/UX prensiplerini uygulayarak arayüzleri sade ve etkili hale getiriyorum.",
+      "featured": "CSS ile performansı artıran modern teknikler (örneğin, grid ve flexbox gibi) kullanarak daha etkili ve dinamik arayüzler tasarlamaya devam edeceğim. Ayrıca, responsive tasarımlar ve animasyonlarla kullanıcı deneyimini daha da zenginleştirmeyi hedefliyorum."
+    }
+  },
+
+  "skills": {
+    "technologies": {
+      "header": "Web Teknolojileri ve Dilleri"
+    },
+    "frontEnd": {
+      "header": "Ön Yüz Teknolojileri"
+    },
+    "backend": {
+      "header": "Arka Yüz Teknolojileri"
+    },
+    "databasesNoSQL": {
+      "header": "Veritabanları - NoSQL"
+    },
+    "databasesSQL": {
+      "header": "Veritabanları - SQL"
+    },
+    "cloudStorage": {
+      "header": "Bulut ve Depolama"
+    },
+    "containerization": {
+      "header": "Kapsayıcılama ve Orkestrasyon"
+    }
+  },
+  "plans": {
+    "header": "Planlarım"
+  },
+  "frontendTechnologies": {
+    "react": {
+      "header": "React",
+      "body": "React, kullanıcı arayüzleri oluşturmak için kullanılan bir JavaScript kütüphanesidir.Daha keyifli ve kullanıcı dostu sayfaları daha güvenli hale getirmemizi kolaylaştıran bu kütüphane ile yaptığım projeler 200+ den fazladır.Github'dan beni takip edip projelerime bakabilirsiniz."
+    },
+    "nextjs": {
+      "header": "NextJS",
+      "body": "NextJS: React üzerine inşa edilmiş bir framework'tür ve hem sunucu tarafı render'ı (SSR) hem de istemci tarafı render'ı (CSR) için güçlü özellikler sunar. Ayrıca, modern web uygulamaları geliştirmek için bir dizi kullanışlı özellik ve optimizasyon sağlar.Sunucu Tarafı Render'ı (SSR): Her istekte içerik oluşturmanız gerektiğinde ve içerik sıklıkla değiştiğinde veya kullanıcıya özgü olduğunda kullanılır.İstemci Tarafı Render'ı (CSR): Zengin etkileşime ihtiyaç duyduğunuzda ve istemci tarafında veri alıp verebildiğinizde tercih edilir.Statik Site Oluşturma (SSG): Sık sık değişmeyen statik içeriğiniz varsa, bu bloglar, dokümantasyon ve pazarlama sayfaları için mükemmeldir."
+    }
+  },
+  "backendTechnologies": {
+    "nodejs": {
+      "header": "Node.js",
+      "body": "Node.js, Chrome'un V8 JavaScript motoru üzerine kurulmuş bir JavaScript çalışma ortamıdır. Geliştiricilere JavaScript kullanarak ölçeklenebilir ve yüksek performanslı sunucu tarafı uygulamaları oluşturma imkanı sağlar. Node.js ile API geliştirme, gerçek zamanlı uygulamalar gibi birçok projede çalıştım. Olay tabanlı ve bloklanmayan I/O modeli, aynı anda birden fazla isteği verimli bir şekilde işlemek için idealdir. Node.js ile yaptığım projeleri GitHub üzerinden inceleyebilirsiniz."
+    },
+    "express": {
+      "header": "Express",
+      "body": "Express, hızlı, minimal ve esnek bir Node.js web uygulama çatısıdır. Rotalar, middleware ve HTTP isteklerinin yönetimini sağlayarak web uygulamaları ve API'ler oluşturmayı kolaylaştırır. Birçok projede RESTful API'ler ve full-stack uygulamalar oluşturmak için Express kullandım. Express, genellikle Node.js ile birlikte ölçeklenebilir web çözümleri geliştirmek için kullanılır. Express'i kullandığım projeleri GitHub üzerinden inceleyebilirsiniz."
+    }
+  },
+  "noSQL": {
+    "mongodb": {
+      "header": "MongoDB",
+      "body": "MongoDB, belgeler tabanlı bir NoSQL veritabanıdır ve JSON benzeri dokümanlar kullanarak verileri depolar. Esnek veri modellemesi ve güçlü sorgu yetenekleri sunarak uygulama geliştirmeyi kolaylaştırır. MongoDB ile birçok projede çalıştım, özellikle dinamik ve ölçeklenebilir veri yapıları gerektiren uygulamalarda. Veritabanı şeması gerektirmediği için hızlı bir şekilde veri ekleyip düzenleyebilir ve büyük veri kümelerini etkili bir şekilde yönetebilirsiniz. MongoDB ile yaptığım projeleri GitHub üzerinden inceleyebilirsiniz."
+    },
+    "firebase": {
+      "header": "Firebase",
+      "body": "Firebase, Google tarafından sağlanan bir mobil ve web uygulama geliştirme platformudur. Gerçek zamanlı veritabanı, kimlik doğrulama, barındırma ve daha fazlasını içeren bir dizi hizmet sunar. Firebase ile uygulama geliştirme süreçlerini hızlandırarak, ölçeklenebilir ve güvenli uygulamalar oluşturmak mümkündür. Özellikle kullanıcı kimlik doğrulama, veri senkronizasyonu ve bildirimler gibi özellikleri için Firebase'i kullandım. Firebase ile gerçekleştirdiğim projeleri GitHub'dan inceleyebilirsiniz."
+    }
+  },
+  "sql": {
+    "postgresql": {
+      "header": "PostgreSQL",
+      "body": "PostgreSQL, güçlü ve açık kaynaklı bir nesne-ilişkisel veritabanı sistemidir. Gelişmiş özellikleri, güvenilirliği ve karmaşık sorguları desteklemesi ile bilinir. PostgreSQL, SQL standartlarına geniş destek sunar ve özelleştirilebilirliği sayesinde geliştiricilerin özel veri türleri, operatörler ve fonksiyonlar oluşturmasına olanak tanır. Karmaşık sorgular ve işlemlerin gerekli olduğu projelerde PostgreSQL kullandım. Güçlü performansı ve esnekliği, hem küçük hem de büyük ölçekli uygulamalar için mükemmel bir seçim olmasını sağlar. PostgreSQL ile ilgili projelerimi GitHub'dan inceleyebilirsiniz."
+    },
+    "mysql": {
+      "header": "MySQL",
+      "body": "MySQL, yaygın olarak kullanılan açık kaynaklı bir ilişkisel veritabanı yönetim sistemidir. Güvenilirliği, kullanımı kolaylığı ve performansı ile bilinir. MySQL, ilişkisel verileri yönetme ve sorgulama için bir dizi özelliği destekler ve web uygulamaları için popüler bir tercih sağlar. Yapılandırılmış verileri yönetmek ve çeşitli teknolojilerle uyumluluk sağlamak için MySQL'i çeşitli projelerde kullandım. MySQL ile gerçekleştirdiğim projeleri GitHub'dan inceleyebilirsiniz."
+    }
+  },
+  "storage": {
+    "cloudinary": {
+      "header": "Cloudinary",
+      "body": "Cloudinary, medya varlıklarını (görüntüler ve videolar gibi) yönetmek ve sunmak için güçlü bir bulut tabanlı hizmettir. Görüntü ve video yükleme, dönüştürme, optimizasyon ve depolama gibi geniş bir özellik yelpazesi sunar. Cloudinary'nin güçlü API'si, web ve mobil uygulamalarla sorunsuz entegrasyon sağlar, bu da medya yönetimini ölçeklenebilir ve verimli bir şekilde yapmayı mümkün kılar. Cloudinary'yi çeşitli projelerde medya içeriğini yönetmek ve geliştirmek için kullandım. Cloudinary kullanılan projelerimi GitHub'dan inceleyebilirsiniz."
+    },
+    "redis": {
+      "header": "Redis",
+      "body": "Redis, hız ve çok yönlülüğü ile bilinen açık kaynaklı bir bellek içi veri yapısı deposudur. Stringler, hashler, listeler, kümeler ve daha fazlası gibi çeşitli veri yapılarını destekler. Redis genellikle önbellekleme, gerçek zamanlı analizler ve mesajlaşma aracı olarak kullanılır. Yüksek performansı ve kullanım kolaylığı, hızlı veri erişimi ve işleme gerektiren uygulamalar için popüler bir seçenek olmasını sağlar. Redis'i çeşitli projelerde performansı optimize etmek ve gerçek zamanlı verileri yönetmek için kullandım. Redis kullanılan projelerimi GitHub'dan kontrol edebilirsiniz."
+    }
+  },
+  "orchestration": {
+    "docker": {
+      "header": "Docker",
+      "body": "Docker, uygulamaları ve servisleri izole bir ortamda çalıştırmak için kullanılan bir konteynerleştirme platformudur. Uygulama ve bağımlılıklarını bir konteyner içinde paketleyerek taşınabilirliğini artırır ve geliştirme, test ve üretim ortamlarında tutarlılığı sağlar. Docker, mikro servis mimarileri ve çoklu ortamlar için mükemmel bir seçenektir. Docker'ı çeşitli projelerde medya varlıklarını yönetmek ve geliştirmek için kullandım. Docker ile yapılan projelerimi GitHub'dan inceleyebilirsiniz."
+    },
+    "kubernetes": {
+      "header": "Kubernetes",
+      "body": "Kubernetes, konteynerli uygulamaların otomatik olarak dağıtımı, ölçeklendirilmesi ve yönetilmesi için açık kaynaklı bir platformdur. Uygulama ölçeklenebilirliğini artırır ve çeşitli kaynakları verimli bir şekilde yönetir. Kubernetes'i performansı optimize etmek ve veri işleme süreçlerini yönetmek için çeşitli projelerde kullandım. Kubernetes ile yapılan projelerimi GitHub'dan kontrol edebilirsiniz."
+    }
+  }
+}
