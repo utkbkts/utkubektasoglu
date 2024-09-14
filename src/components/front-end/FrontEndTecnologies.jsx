@@ -15,9 +15,9 @@ const FrontEndTecnologies = ({ t }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: index * 0.5 + 0.5 }}
           key={item.id}
-          className="border border-gray-200 bg-transparent h-[500px] rounded-md flex items-center justify-center"
+          className="border border-gray-200 bg-transparent md:h-[500px] h-full rounded-md flex items-center justify-center md:flex-row flex-col md:p-0 p-4"
         >
-          <div className="flex-1 flex justify-center">
+          <div className="md:flex-1  flex justify-center">
             <img
               src={item.img}
               className={`w-16 h-16 rounded-full ${

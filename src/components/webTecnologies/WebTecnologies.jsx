@@ -34,11 +34,14 @@ const WebTecnologies = ({ t }) => {
   };
 
   return (
-    <div className="h-full w-full pt-12 grid grid-cols-1 gap-4 mb-3">
+    <div className="h-full w-full pt-12 grid grid-cols-1 gap-4 mb-3  ">
       {skillsDetail.map((item, index) => (
-        <div key={item.id} className="flex gap-2">
+        <div
+          key={item.id}
+          className="flex gap-2 md:flex-row flex-col md:items-start items-center"
+        >
           <img src={item.img} alt="" className="w-12 h-12" />
-          <div className="flex flex-col gap-1 ">
+          <div className="flex flex-col gap-4 md:items-start items-center">
             <motion.h1
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
@@ -47,6 +50,7 @@ const WebTecnologies = ({ t }) => {
               {item.title}
             </motion.h1>
             <motion.p
+              className="md:text-left text-center"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: index * 0.5 + 1 }}
@@ -62,6 +66,7 @@ const WebTecnologies = ({ t }) => {
               {t("plans.header")}
             </motion.h1>
             <motion.p
+              className="md:text-left text-center"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: index * 0.5 + 2 }}
@@ -72,7 +77,7 @@ const WebTecnologies = ({ t }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: index * 0.5 + 2.5 }}
-              className="relative w-full h-2 bg-gray-800 rounded-md"
+              className="relative w-full h-2 bg-gray-800 rounded-md lg:block hidden"
             >
               <span
                 className="absolute top-0 left-0 h-full bg-green-500 rounded-md"

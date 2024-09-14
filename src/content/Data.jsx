@@ -24,6 +24,7 @@ export const skillsData = [
   {
     id: 1,
     category: "Web Technologies & languages",
+    title: "technologies",
     skills: [
       { name: "HTML" },
       { name: "CSS" },
@@ -34,31 +35,41 @@ export const skillsData = [
   {
     id: 2,
     category: "Front-End Technologies",
+    title: "frontEnd",
     skills: [{ name: "React" }, { name: "Next.js" }],
   },
   {
     id: 3,
     category: "Backend Technologies",
+    title: "backend",
+
     skills: [{ name: "Node.js" }, { name: "Express" }],
   },
   {
     id: 4,
     category: "Databases - NoSQL",
+    title: "databasesNoSQL",
+
     skills: [{ name: "MongoDB" }, { name: "Firebase" }],
   },
   {
     id: 5,
     category: "Databases - SQL",
+    title: "databasesSQL",
+
     skills: [{ name: "PostgreSQL" }, { name: "MySQL" }],
   },
   {
     id: 6,
     category: "Cloud and Storage",
+    title: "cloudStorage",
+
     skills: [{ name: "Cloudinary" }, { name: "Redis" }],
   },
   {
     id: 7,
     category: "Containerization and Orchestration",
+    title: "containerization",
     skills: [{ name: "Docker" }, { name: "Kubernetes" }],
   },
 ];

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import image from "../assets/images/ben.jpg";
 import { skillsData } from "../content/Data";
 const Sidebar = ({ setTabs, tabs, t }) => {
@@ -57,5 +58,9 @@ const Sidebar = ({ setTabs, tabs, t }) => {
     </div>
   );
 };
-
+Sidebar.propTypes = {
+  t: PropTypes.func.isRequired,
+  setTabs: PropTypes.func,
+  tabs: PropTypes.number,
+};
 export default Sidebar;

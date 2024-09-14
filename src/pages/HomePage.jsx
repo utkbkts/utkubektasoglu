@@ -1,28 +1,23 @@
-import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import WebTecnologies from "../components/webTecnologies/WebTecnologies";
 import FrontEndTecnologies from "../components/front-end/FrontEndTecnologies";
 import { AccountDetail, flags } from "../content/Data";
-import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import BackendTechnologies from "../components/backend/BackendTechnologies";
 import NoSql from "../components/nosql/NoSql";
 import Sql from "../components/sqlPage/SqlPage";
 import Storage from "../components/storage/Storage";
 import Orchestration from "../components/orchestration/Orchestration";
-const HomePage = () => {
-  const [tabs, setTabs] = useState(1);
-  const [t, i18n] = useTranslation("global");
-  const handleChangeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-  };
+import PropTypes from "prop-types";
+const HomePage = ({ handleChangeLanguage, t, setTabs, tabs }) => {
   return (
     <div className="font-ro w-full h-screen">
       <div className="flex max-w-5xl mx-auto items-start justify-center">
-        <div className="flex-1 sticky top-0">
+        <div className="flex-1 sticky top-0 lg:block hidden">
           <Sidebar setTabs={setTabs} tabs={tabs} t={t} />
         </div>
-        <div className="flex-[2] flex flex-col items-center mt-2 gap-3">
+
+        <div className="lg:flex-[2] w-full flex flex-col items-center mt-2 gap-3 lg:p-0 p-8">
           <h1>Full Stack Developer</h1>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -78,4 +73,10 @@ const HomePage = () => {
   );
 };
 
+HomePage.propTypes = {
+  handleChangeLanguage: PropTypes.func,
+  t: PropTypes.func.isRequired,
+  tabs: PropTypes.number,
+  setTabs: PropTypes.func,
+};
 export default HomePage;
