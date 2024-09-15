@@ -7,7 +7,7 @@ const FrontEndTecnologies = ({ t }) => {
     transition: { duration: 0.3 },
   };
   return (
-    <div className="w-full h-full grid grid-cols-1 gap-3">
+    <div className="w-full h-full grid grid-cols-1 md:gap-3 gap-6">
       {frontendDetail.map((item, index) => (
         <motion.div
           whileHover={hoverEffect}
@@ -15,7 +15,7 @@ const FrontEndTecnologies = ({ t }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: index * 0.5 + 0.5 }}
           key={item.id}
-          className="border border-gray-200 bg-transparent md:h-[500px] h-full rounded-md flex items-center justify-center md:flex-row flex-col md:p-0 p-4"
+          className="border border-gray-200 bg-transparent md:h-[500px] h-full rounded-md flex items-center  justify-center md:flex-row flex-col md:p-0 p-4 w-full"
         >
           <div className="md:flex-1  flex justify-center">
             <img

@@ -8,7 +8,7 @@ const Header = ({ t, setTabs, tabs }) => {
     <>
       <div className="fixed top-0 w-full container mx-auto right-0 p-4 z-50">
         <div
-          className={`hamburger ${active ? "active" : ""}`}
+          className={`hamburger ${active ? "active" : ""} lg:hidden block`}
           onClick={() => setActive(!active)}
         >
           <span className="bar"></span>
