@@ -2,15 +2,10 @@ import PropTypes from "prop-types";
 import { frontendDetail } from "../../content/Data";
 import { motion } from "framer-motion";
 const FrontEndTecnologies = ({ t }) => {
-  const hoverEffect = {
-    scale: 1.05,
-    transition: { duration: 0.3 },
-  };
   return (
     <div className="w-full h-full grid grid-cols-1 md:gap-3 gap-6">
       {frontendDetail.map((item, index) => (
         <motion.div
-          whileHover={hoverEffect}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: index * 0.5 + 0.5 }}

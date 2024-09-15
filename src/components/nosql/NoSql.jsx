@@ -3,11 +3,6 @@ import PropTypes from "prop-types";
 import { noSQL } from "../../content/Data";
 
 const NoSql = ({ t }) => {
-  const hoverEffect = {
-    scale: 1.05,
-    transition: { duration: 0.3 },
-  };
-
   return (
     <motion.div
       className=" flex flex-col items-center justify-center text-gray-300 p-6"
@@ -21,7 +16,6 @@ const NoSql = ({ t }) => {
           transition={{ duration: 1, delay: index * 0.5 + 0.5 }}
           key={item.id}
           className="w-full max-w-4xl p-6 border border-gray-200 rounded-md mb-6 bg-transparent"
-          whileHover={hoverEffect}
         >
           <div className="flex gap-6 items-center md:flex-row flex-col">
             <motion.img
