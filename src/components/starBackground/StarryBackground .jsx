@@ -1,7 +1,7 @@
 import Star from "../star/Star";
 
 const StarryBackground = () => {
-  const numStars = 100; // Yıldız sayısını ayarlayın
+  const numStars = 100;
   const stars = Array.from({ length: numStars }, (_, i) => {
     const x = Math.random() * 100 + "vw";
     const y = Math.random() * 100 + "vh";
