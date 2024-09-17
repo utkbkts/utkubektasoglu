@@ -4,40 +4,44 @@ import { noSQL } from "../../content/Data";
 
 const NoSql = ({ t }) => {
   return (
-    <motion.div
-      className=" flex flex-col items-center justify-center text-gray-300 p-6"
-      initial="hidden"
-      animate="visible"
-    >
+    <div className="w-full h-full grid grid-cols-1 md:gap-3 gap-6">
       {noSQL.map((item, index) => (
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: index * 0.5 + 0.5 }}
           key={item.id}
-          className="w-full max-w-4xl p-6 border border-gray-200 rounded-md mb-6 bg-transparent"
+          className="border border-gray-200 bg-transparent h-full rounded-md flex items-center   justify-center  flex-col  p-4 w-full"
         >
-          <div className="flex gap-6 items-center md:flex-row flex-col">
-            <motion.img
+          <div className="flex justify-center w-full">
+            <img
               src={item.img}
-              className="w-16 h-16 rounded-full object-cover bg-green-500 p-2"
-              alt="Node.js"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              className={`w-full h-44 object-cover`}
+              alt={item.title}
             />
-            <div className="flex flex-col items-center md:items-start md:text-start text-center">
-              <h2 className="text-2xl font-semibold uppercase text-white">
-                {t(`noSQL.${item.title.toLowerCase()}.header`)}
-              </h2>
-              <p className="mt-2">
-                {t(`noSQL.${item.title.toLowerCase()}.body`)}
-              </p>
+          </div>
+          <div className="p-1 flex flex-col gap-2">
+            <h1 className="uppercase text-2xl border-b border-blue-500">
+              {t(`noSQL.${item.title.toLowerCase()}.header`)}
+            </h1>
+            {t(`noSQL.${item.title.toLowerCase()}.body`)
+              .split(".")
+              .map((part, index) => (
+                <span key={index}>
+                  {part.trim()} <br />
+                </span>
+              ))}
+            <div className="relative w-full h-2 bg-gray-800 rounded-md">
+              <span
+                className="absolute top-0 left-0 h-full bg-green-500 rounded-md"
+                style={{ width: item.progress }}
+              ></span>
+              <span className="absolute right-0 -top-6">{item.progress}</span>
             </div>
           </div>
         </motion.div>
       ))}
-    </motion.div>
+    </div>
   );
 };
 NoSql.propTypes = {

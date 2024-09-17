@@ -10,18 +10,16 @@ const FrontEndTecnologies = ({ t }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: index * 0.5 + 0.5 }}
           key={item.id}
-          className="border border-gray-200 bg-transparent md:h-[500px] h-full rounded-md flex items-center  justify-center md:flex-row flex-col md:p-0 p-4 w-full"
+          className="border border-gray-200 bg-transparent h-full rounded-md flex items-center   justify-center  flex-col  p-4 w-full"
         >
-          <div className="md:flex-1  flex justify-center">
+          <div className="flex justify-center w-full">
             <img
               src={item.img}
-              className={`w-16 h-16 rounded-full ${
-                item.title === "nextjs" ? "bg-white rounded-full p-1" : ""
-              }`}
+              className={`w-full h-44 object-cover`}
               alt={item.title}
             />
           </div>
-          <div className="flex-[3] p-1 flex flex-col gap-2">
+          <div className="p-1 flex flex-col gap-2">
             <h1 className="uppercase text-2xl border-b border-blue-500">
               {t(`frontendTechnologies.${item.title.toLowerCase()}.header`)}
             </h1>

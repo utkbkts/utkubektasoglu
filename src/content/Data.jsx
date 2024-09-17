@@ -42,8 +42,7 @@ export const skillsData = [
     id: 3,
     category: "Backend Technologies",
     title: "backend",
-
-    skills: [{ name: "Node.js" }, { name: "Express" }],
+    skills: [{ name: "Node.js" }],
   },
   {
     id: 4,
@@ -118,12 +117,6 @@ export const backendDetail = [
     id: 1,
     title: "nodejs",
     img: backend[0],
-    progress: "100%",
-  },
-  {
-    id: 2,
-    title: "express",
-    img: backend[1],
     progress: "100%",
   },
 ];

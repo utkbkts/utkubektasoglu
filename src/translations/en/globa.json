@@ -52,34 +52,31 @@
   },
   "frontendTechnologies": {
     "react": {
-      "header": "react",
-      "body": "React is a JavaScript library used for building user interfaces. It simplifies the creation of interactive and user-friendly pages, making them more secure. With this library, I have worked on over 200 projects. You can follow me on GitHub and check out my projects."
+      "header": "React",
+      "body": "Project Overview: In this project, I created a fully dynamic and manageable e-commerce platform with both user and admin panels by using modern web development technologies. The project is designed to prioritize user experience with various functionalities: User and Admin Panels: Both sides of the system are fully manageable and customizable to meet the needs. Dynamic Features: Actions like product listing and category management are dynamic and easily accessible. Pagination, Sorting, and Search: Users can quickly and efficiently reach the products they are looking for. Rating System: I implemented a rating feature to collect user feedback on products. Technologies: - I provided a powerful and fast user interface with React and Redux. - Managed data efficiently using RTK Query. - Built a secure and robust backend with NodeJS. - Established database connections using MongoDB. Throughout the development of this project, I focused on user experience, performance, and manageability."
     },
     "nextjs": {
-      "header": "nextjs",
-      "body": "NextJS: A framework built on top of React, offering powerful features for both server-side rendering (SSR) and client-side rendering (CSR). It also provides a range of useful features and optimizations for developing modern web applications. Server-Side Rendering (SSR): Used when you need to generate content on every request and when the content frequently changes or is user-specific. Client-Side Rendering (CSR): Preferred when you need rich interactivity and can handle data retrieval and manipulation on the client side. Static Site Generation (SSG): Ideal for static content that does not change often, such as blogs, documentation, and marketing pages."
+      "header": "NextJS",
+      "body": "Project Overview: In this project, I developed a powerful and performance-focused web application using Next.js. The application is a comprehensive solution featuring both user and admin sides, built using modern web technologies: - User Management: I implemented a secure and flexible authentication system with NextAuth. - Database: Managed database operations with MongoDB, enabling efficient handling of large-scale data. - Email Sending: Implemented email notifications and verifications for users using Nodemailer. - Payment System: Integrated Stripe to provide secure and fast payment transactions. - File Management: Optimized image storage and management using Cloudinary. - API Communication: Managed API requests efficiently across the application using Axios. - TypeScript Support: Enhanced the project with TypeScript for improved reliability and error prevention. This project is a modern web application optimized for user experience, security, and performance."
     }
   },
   "backendTechnologies": {
     "nodejs": {
       "header": "Node.js",
-      "body": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows developers to build scalable and high-performance server-side applications using JavaScript. With Node.js, I have worked on various projects, from API development to real-time applications. Its event-driven, non-blocking I/O model makes it efficient for handling multiple requests. You can explore my projects involving Node.js on my GitHub."
-    },
-    "express": {
-      "header": "Express",
-      "body": "Express is a fast, minimal, and flexible Node.js web application framework. It simplifies the process of building web applications and APIs by providing a robust set of features for handling routes, middleware, and HTTP requests. I've used Express in many projects to create RESTful APIs and full-stack applications. It is often used with Node.js for building scalable web solutions. You can check out my projects using Express on GitHub."
+      "body": "Comprehensive Budget Control Application: This project is a modern web application developed to simplify personal or corporate budget management. Users can effectively plan and manage their monthly expenses, income, and projects. The project provides a strong user experience and management features: - A secure and scalable backend infrastructure built with Node.js. - A dynamic and fast user interface created using React and Redux. - State persistence implemented with Redux Persist to prevent data loss by saving the app state locally. - A sleek and user-friendly interface designed with Ant Design. - SCSS/SASS used to make the project more modular and flexible. This project is a user-friendly, performance-oriented solution that simplifies budget control and financial management processes."
     }
   },
   "noSQL": {
     "mongodb": {
       "header": "MongoDB",
-      "body": "MongoDB is a document-oriented NoSQL database that stores data in JSON-like documents. It provides a flexible data model and powerful query capabilities, making it easier to develop applications. I've worked on various projects with MongoDB, especially in scenarios requiring dynamic and scalable data structures. Its schema-less design allows for quick data insertion and modification, and effective management of large datasets. You can explore my projects involving MongoDB on my GitHub."
+      "body": "Project Overview: In this project, I created a fully dynamic and manageable e-commerce platform with both user and admin panels by using modern web development technologies. The project is designed to prioritize user experience with various functionalities: User and Admin Panels: Both sides of the system are fully manageable and customizable to meet the needs. Dynamic Features: Actions like product listing and category management are dynamic and easily accessible. Pagination, Sorting, and Search: Users can quickly and efficiently reach the products they are looking for. Rating System: I implemented a rating feature to collect user feedback on products. Technologies: - I provided a powerful and fast user interface with React and Redux. - Managed data efficiently using RTK Query. - Built a secure and robust backend with NodeJS. - Established database connections using MongoDB. Throughout the development of this project, I focused on user experience, performance, and manageability."
     },
     "firebase": {
       "header": "Firebase",
-      "body": "Firebase is a mobile and web application development platform provided by Google. It offers a suite of services including real-time databases, authentication, hosting, and more. Firebase accelerates the development process by providing scalable and secure solutions for various application needs. I've used Firebase in several projects for features such as user authentication, data synchronization, and notifications. You can check out my projects utilizing Firebase on GitHub."
+      "body": "Food Ordering App: This project is a modern web application designed to simplify the process of ordering food online. With a sleek interface and a powerful infrastructure, it provides users with a fast and seamless experience: - A reliable real-time database and authentication system implemented with Firebase. - A flexible and modular styling structure created using SCSS/SASS. - A user-friendly and modern interface developed with Ant Design. - Secure and efficient API requests managed with Axios. - Simplified data manipulation and processing using Lodash. This application is optimized to allow users to order food quickly while enabling restaurants to easily manage their menus."
     }
   },
+
   "sql": {
     "postgresql": {
       "header": "PostgreSQL",
