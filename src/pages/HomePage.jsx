@@ -60,6 +60,21 @@ const HomePage = ({ handleChangeLanguage, t, setTabs, tabs }) => {
               </a>
             ))}
           </motion.div>
+          <a
+            download="cv.pdf"
+            target="_blank"
+            href="/utkutoygunbektasoglu(CV).pdf"
+            className="w-24 h-6 rounded-md bg-blue-500 text-white text-center"
+            rel="noopener noreferrer"
+          >
+            <motion.button
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, staggerChildren: 0.2, delay: 3 }}
+            >
+              CV
+            </motion.button>
+          </a>
           {tabs === 1 && <WebTecnologies t={t} />}
           {tabs === 2 && <FrontEndTecnologies t={t} />}
           {tabs === 3 && <BackendTechnologies t={t} />}

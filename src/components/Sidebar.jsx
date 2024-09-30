@@ -33,17 +33,17 @@ const Sidebar = ({ setTabs, tabs, t }) => {
             className="w-32 h-32 rounded-full object-cover"
           />
           <h1 className="border-b border-blue-500">Skills</h1>
-          <div className="text-center flex flex-col gap-4">
+          <div className="text-center flex flex-col gap-4 ">
             {skillsData.map((item) => (
               <ul key={item.id} className="flex flex-col gap-1">
                 <h1
                   onClick={() => setTabs(item.id)}
-                  className="relative pb-2 text-gray-100"
+                  className="relative pb-2 text-gray-100 "
                 >
                   {getSkills(item.category)}
                   <span
-                    className={`absolute transition-all duration-300 bottom-0 left-0 w-24 h-[2px] bg-white ${
-                      tabs === item.id && "!w-full"
+                    className={`absolute transition-all  duration-300 bottom-0 left-0 w-24 h-[2px] bg-white ${
+                      tabs === item.id ? "!w-full" : "animate-pulse bg-blue-500"
                     }`}
                   ></span>
                 </h1>
