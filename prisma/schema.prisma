@@ -56,9 +56,10 @@ model PostProfilePic {
 }
 
 model Review {
-  id      String @id @default(cuid())
+  id      String  @id @default(cuid())
   rating  Float
   comment String
+  reply   String?
 
   postId String
   post   Post   @relation(fields: [postId], references: [id])

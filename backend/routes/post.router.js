@@ -16,4 +16,11 @@ router.post(
 
 router.post("/reviews", isAuthenticated, postController.reviewPost);
 
+router.post(
+  "/review/answer",
+  isAuthenticated,
+  authorizeRoles("admin"),
+  postController.reviewAnswer
+);
+
 export default router;

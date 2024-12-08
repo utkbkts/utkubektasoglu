@@ -127,5 +127,36 @@ const reviewPost = async (req, res) => {
       .json({ message: "Server Error", error: error.message });
   }
 };
+const reviewAnswer = async (req, res) => {
+  const { reply, reviewId } = req.body;
 
-export default { createPost, reviewPost };
+  try {
+    const review = await prisma.review.findUnique({
+      where: { id: reviewId },
+    });
+
+    if (!review) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+
+    if (req.user.role !== "admin") {
+      return res
+        .status(403)
+        .json({ error: "Only admins can respond to reviews" });
+    }
+
+    await prisma.review.update({
+      where: { id: reviewId },
+      data: { reply },
+    });
+
+    return res.status(200).json({ message: "Reply added successfully" });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ error: error.message, message: "Internal server error" });
+  }
+};
+
+export default { createPost, reviewPost, reviewAnswer };
