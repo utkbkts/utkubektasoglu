@@ -14,4 +14,6 @@ router.post(
   postController.createPost
 );
 
+router.post("/reviews", isAuthenticated, postController.reviewPost);
+
 export default router;

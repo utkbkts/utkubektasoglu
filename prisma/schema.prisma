@@ -13,7 +13,7 @@ enum ROLE {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(cuid())
   name      String
   email     String    @unique
   password  String
@@ -28,13 +28,14 @@ model User {
 }
 
 model Post {
-  id           Int              @id @default(autoincrement())
+  id           String           @id @default(cuid())
   title        String
   content      String
+  category     String[]
   profilePic   PostProfilePic[]
   ratings      Float            @default(0)
   numOfReviews Int              @default(0)
-  authorId     Int
+  authorId     String
   author       User             @relation(fields: [authorId], references: [id])
 
   reviews Review[]
@@ -47,23 +48,23 @@ model Post {
 }
 
 model PostProfilePic {
-  id        Int    @id @default(autoincrement())
+  id        String @id @default(cuid())
   public_id String
   url       String
-  postId    Int
+  postId    String
   post      Post   @relation(fields: [postId], references: [id])
 }
 
 model Review {
-  id      Int    @id @default(autoincrement())
+  id      String @id @default(cuid())
   rating  Float
   comment String
 
-  postId Int
-  post   Post @relation(fields: [postId], references: [id])
+  postId String
+  post   Post   @relation(fields: [postId], references: [id])
 
-  authorId Int
-  author   User @relation(fields: [authorId], references: [id])
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
