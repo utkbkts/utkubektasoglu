@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ROLE {
+  admin
+  user
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  posts     Post[]
+  reviews   Review[]
+  role      ROLE      @default(user)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([email])
+}
+
+model Post {
+  id           Int              @id @default(autoincrement())
+  title        String
+  content      String
+  profilePic   PostProfilePic[]
+  ratings      Float            @default(0)
+  numOfReviews Int              @default(0)
+  authorId     Int
+  author       User             @relation(fields: [authorId], references: [id])
+
+  reviews Review[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([authorId, createdAt])
+}
+
+model PostProfilePic {
+  id        Int    @id @default(autoincrement())
+  public_id String
+  url       String
+  postId    Int
+  post      Post   @relation(fields: [postId], references: [id])
+}
+
+model Review {
+  id      Int    @id @default(autoincrement())
+  rating  Float
+  comment String
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id])
+
+  authorId Int
+  author   User @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([postId, createdAt])
+}
