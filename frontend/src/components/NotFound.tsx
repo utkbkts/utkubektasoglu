@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import notFound from "/not-found.gif";
 import notFound2 from "/notfoundPage.jpg";
-import Button from "./ui/button";
+import { Button } from "./ui/button";
 const NotFound = () => {
   return (
     <div className="w-full">
