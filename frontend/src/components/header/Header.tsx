@@ -7,6 +7,7 @@ import { Form } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MenuLinks from "./partials/MenuLinks";
 import { searchData, searchMessageData } from "@/validation/SearchSchema";
+import BottomHeader from "./partials/BottomHeader";
 
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -60,6 +61,7 @@ const Header = () => {
           />
         </div>
       </div>
+      <BottomHeader />
     </div>
   );
 };
