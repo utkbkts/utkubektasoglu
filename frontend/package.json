@@ -29,6 +29,7 @@
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "website": "file:..",
     "zod": "^3.24.0"
   },
   "devDependencies": {
