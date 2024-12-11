@@ -46,6 +46,11 @@ const HomePage = () => {
         {/* Left:Blogs List*/}
         <div className="col-span-2 mt-12">
           <RecentBlogsCard />
+          <div className="flex items-center justify-center">
+            <Button size={"md"} variant={"destructive"}>
+              Load More
+            </Button>
+          </div>
         </div>
 
         {/* Right:Sidebar */}
