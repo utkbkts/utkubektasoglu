@@ -4,6 +4,7 @@ import NotFound from "@/components/NotFound";
 import MainLayouts from "@/layouts/MainLayouts";
 
 const HomePage = React.lazy(() => import("@/pages/home/HomePage"));
+const DetailBlog = React.lazy(() => import("@/pages/details/DetailBlog"));
 
 export const MainRoutes = {
   path: "/",
@@ -15,6 +16,14 @@ export const MainRoutes = {
       element: (
         <Suspense fallback={<Loading />}>
           <HomePage />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/detail/:id",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <DetailBlog />
         </Suspense>
       ),
     },
