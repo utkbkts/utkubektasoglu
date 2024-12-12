@@ -1,7 +1,9 @@
 import EditProfileInput from "@/components/input/EditInput";
+import RichTextEditorInput from "@/components/input/RichTextEditor";
 import SelectInput from "@/components/input/SelectInput";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createData, createFormData } from "@/validation/CreateForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,8 +27,8 @@ const CreateForm = () => {
     }
   };
 
-  const form = useForm({
-    resolver: zodResolver(),
+  const form = useForm<createData>({
+    resolver: zodResolver(createFormData),
     defaultValues: {
       categoryHeader: "",
       title: "",
@@ -67,11 +69,12 @@ const CreateForm = () => {
             label="Title"
             placeholder="Title"
           />
-          <EditProfileInput
+          <RichTextEditorInput
             control={form.control}
             name="description"
             label="Description"
             placeholder="Description"
+            setValue={form.setValue}
             multiline
           />
           <EditProfileInput
