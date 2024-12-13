@@ -3,6 +3,7 @@ import RichTextEditorInput from "@/components/input/RichTextEditor";
 import SelectInput from "@/components/input/SelectInput";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { usePostStore } from "@/store/PostStore";
 import { createData, createFormData } from "@/validation/CreateForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useRef, useState } from "react";
@@ -11,6 +12,9 @@ import { toast } from "sonner";
 
 const CreateForm = () => {
   const [image, setImages] = useState("");
+
+  const { createPost } = usePostStore();
+
   const FileInputRef = useRef<HTMLInputElement>(null);
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files?.[0];
@@ -45,9 +49,13 @@ const CreateForm = () => {
     }
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    toast.success("Form submitted successfully!");
+  const onSubmit = async (data: any) => {
+    try {
+      await createPost({ ...data, image });
+      toast.success("Form submitted successfully!");
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   return (

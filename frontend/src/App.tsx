@@ -3,13 +3,12 @@ import { router } from "./routes/global-routes";
 import React, { Suspense, useEffect } from "react";
 import { useUserStore } from "./store/AuthStore";
 const App = () => {
-  const { user, checkAuth } = useUserStore();
+  const { checkAuth } = useUserStore();
 
   useEffect(() => {
     checkAuth();
   }, []);
 
-  console.log("🚀 ~ App ~ user:", user);
   return (
     <React.Fragment>
       <Suspense>

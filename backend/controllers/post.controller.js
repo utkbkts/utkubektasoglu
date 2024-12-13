@@ -2,16 +2,16 @@ import prisma from "../libs/db.js";
 import { upload_file } from "../utils/cloudinary.js";
 
 const createPost = async (req, res) => {
-  const { title, content, profilePic, category } = req.body;
+  const { title, description, image, category, categoryHeader } = req.body;
 
-  if (!title || !content || !profilePic || !category) {
+  if (!title || !description || !image || !category || !categoryHeader) {
     return res.status(400).json({ error: "Title and content are required" });
   }
 
   let imagesData = [];
 
-  if (profilePic) {
-    const picsArray = Array.isArray(profilePic) ? profilePic : [profilePic];
+  if (image) {
+    const picsArray = Array.isArray(image) ? image : [image];
     try {
       const uploadPromises = picsArray.map((img) =>
         upload_file(img, "website")
@@ -38,11 +38,12 @@ const createPost = async (req, res) => {
     const post = await prisma.post.create({
       data: {
         title,
-        content,
+        description,
         category: skillsArray,
-        profilePic: {
+        image: {
           create: imagesData,
         },
+        categoryHeader,
         authorId: req.user.id,
       },
     });
