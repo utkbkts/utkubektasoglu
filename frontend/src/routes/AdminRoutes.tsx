@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import Loading from "@/components/Loading";
 import NotFound from "@/components/NotFound";
 import AdminLayouts from "@/layouts/AdminLayouts";
+import { AdminLoaders } from "@/loaders/AdminLoaders";
 
 const CreateForm = React.lazy(
   () => import("@/pages/admin/createForm/CreateForm")
@@ -20,6 +21,7 @@ export const AdminRoutes = {
   path: "/admin",
   element: <AdminLayouts />,
   errorElement: <NotFound />,
+  loader: () => AdminLoaders("admin"),
   children: [
     {
       path: "dashboard",

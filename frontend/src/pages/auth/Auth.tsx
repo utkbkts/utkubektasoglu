@@ -18,12 +18,15 @@ import {
 } from "@/components/ui/card";
 import { useState } from "react";
 import { createLoginData, createLoginFormData } from "@/validation/CreateLogin";
-import useLoginForm from "@/hooks/useLoginForm";
-import useRegisterForm from "@/hooks/useRegisterForm";
+import { Navigate } from "react-router-dom";
+import { useUserStore } from "@/store/AuthStore";
 
 const Auth = () => {
   const [authModal, setAuthModal] = useState(false);
-
+  const { user } = useUserStore();
+  if (user && user.role !== "admin") {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-[350px]">
@@ -49,7 +52,7 @@ const Auth = () => {
 };
 
 function Register() {
-  const { createRegisterForm, loading } = useRegisterForm();
+  const { signup, loading } = useUserStore();
   const form = useForm<createRegisterData>({
     resolver: zodResolver(createRegisterFormData),
     defaultValues: {
@@ -62,7 +65,7 @@ function Register() {
 
   const onSubmit = async (data: createRegisterData) => {
     try {
-      await createRegisterForm(data);
+      await signup(data);
       toast.success("Account created successfully!");
     } catch (err: any) {
       toast.error(err.message);
@@ -104,7 +107,7 @@ function Register() {
 }
 
 function Login() {
-  const { createLoginForm, loading } = useLoginForm();
+  const { login, loading } = useUserStore();
   const form = useForm<createLoginData>({
     resolver: zodResolver(createLoginFormData),
     defaultValues: {
@@ -116,7 +119,7 @@ function Login() {
 
   const onSubmit = async (data: createLoginData) => {
     try {
-      await createLoginForm(data);
+      await login(data);
       toast.success("Account created successfully!");
     } catch (err: any) {
       toast.error(err.message);
