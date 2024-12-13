@@ -1,3 +1,4 @@
+import { createData } from "@/validation/CreateForm";
 import RichTextEditor from "../ui/editorRich/RichTextEditor";
 import {
   FormControl,
@@ -6,14 +7,14 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { UseFormSetValue } from "react-hook-form";
 
 interface Props {
   control: any;
-  name: string;
+  name: keyof createData;
   label?: string;
-  setValue: (name: string, value: any, shouldValidate?: boolean) => void;
+  setValue: UseFormSetValue<createData>;
 }
-
 const RichTextEditorInput = ({ control, name, label, setValue }: Props) => {
   return (
     <FormField
@@ -24,7 +25,9 @@ const RichTextEditorInput = ({ control, name, label, setValue }: Props) => {
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <RichTextEditor
-              onChange={(markdown) => setValue(name, markdown, true)}
+              onChange={(markdown) =>
+                setValue(name, markdown, { shouldValidate: true })
+              }
               ref={field.ref}
             />
           </FormControl>
@@ -35,5 +38,4 @@ const RichTextEditorInput = ({ control, name, label, setValue }: Props) => {
   );
 };
 
-RichTextEditorInput.displayName = "RichTextEditorInput";
 export default RichTextEditorInput;

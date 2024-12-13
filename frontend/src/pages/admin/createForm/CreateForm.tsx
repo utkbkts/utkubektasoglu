@@ -73,9 +73,7 @@ const CreateForm = () => {
             control={form.control}
             name="description"
             label="Description"
-            placeholder="Description"
             setValue={form.setValue}
-            multiline
           />
           <EditProfileInput
             control={form.control}

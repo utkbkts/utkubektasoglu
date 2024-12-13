@@ -1,13 +1,17 @@
 import Sidebar from "@/pages/admin/sidebar/Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const AdminLayouts = () => {
+  const pathname = useLocation().pathname;
+  const isAuth = pathname.startsWith("/admin/auth");
   return (
     <div className="min-h-screen w-full bg-gray-100 flex">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-800 text-white flex flex-col">
-        <Sidebar />
-      </div>
+      {!isAuth && (
+        <div className="w-64 bg-gray-800 text-white flex flex-col">
+          <Sidebar />
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="flex-1 p-6">

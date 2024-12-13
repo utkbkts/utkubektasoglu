@@ -14,6 +14,7 @@ const DashboardAdmin = React.lazy(
 const UsersAll = React.lazy(() => import("@/pages/admin/users/Users"));
 
 const Settings = React.lazy(() => import("@/pages/admin/settings/Settings"));
+const Auth = React.lazy(() => import("@/pages/auth/Auth"));
 
 export const AdminRoutes = {
   path: "/admin",
@@ -49,6 +50,14 @@ export const AdminRoutes = {
       element: (
         <Suspense fallback={<Loading />}>
           <Settings />
+        </Suspense>
+      ),
+    },
+    {
+      path: "auth",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Auth />
         </Suspense>
       ),
     },
