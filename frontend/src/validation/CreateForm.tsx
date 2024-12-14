@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 const messageIsRequired = z
   .string({
     required_error: "required",
@@ -10,7 +9,7 @@ const messageIsRequired = z
 export const createFormData = z.object({
   categoryHeader: messageIsRequired.max(100),
   title: messageIsRequired.max(100),
-  description: messageIsRequired,
+  description: z.string().min(1),
   category: messageIsRequired.max(100),
 });
 

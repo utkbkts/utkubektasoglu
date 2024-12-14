@@ -5,8 +5,25 @@ import PopularProjects from "@/components/card/PopularProjectsCard";
 import RecentBlogsCard from "@/components/card/RecentBlogsCard";
 import RightBlogSidebar from "./sidebar/RightBlogSidebar";
 import SidebarTitle from "@/components/ui/title/SidebarTitle";
+import { usePostStore } from "@/store/PostStore";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  const { posts, getPost } = usePostStore();
+
+  useEffect(() => {
+    getPost();
+  }, [getPost]);
+
+  const leftPost =
+    posts?.posts?.length > 0 && posts.posts[0].categoryHeader === "blog"
+      ? posts.posts[0]
+      : null;
+
+  const rightPosts =
+    posts?.posts
+      ?.filter((post) => post?.categoryHeader === "blog" && post !== leftPost)
+      .slice(0, 4) || [];
   return (
     <div>
       <h1 className="text-2xl font-bold font-body mt-4 border-b border-b-gray-200">
@@ -14,10 +31,13 @@ const HomePage = () => {
       </h1>
       <div className="grid grid-cols-3 gap-6 mt-8 max-w-[1024px] mx-auto">
         {/* Sol Taraf: Tam Ekran Görsel */}
-        <LeftSection />
-
+        <LeftSection post={leftPost} />
         {/* Sağ Taraf: Üç Bölümlü Liste */}
-        <RightSection />
+        <div className="flex flex-col gap-6">
+          {rightPosts.map((item: any) => (
+            <RightSection posts={item} />
+          ))}
+        </div>
       </div>
 
       {/* Section Popular Project */}

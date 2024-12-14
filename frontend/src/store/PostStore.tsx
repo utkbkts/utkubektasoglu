@@ -8,17 +8,22 @@ interface Post {
   title: string;
   description: string;
   category: string;
-  imageUrl?: string;
+  categoryHeader: string;
+  image?: string[];
 }
-
 interface PostStore {
-  posts: Post[];
+  posts: {
+    posts: Post[];
+  };
   loading: boolean;
   createPost: (data: createData & { image: string }) => Promise<void>;
+  getPost: () => Promise<void>;
 }
 
 export const usePostStore = create<PostStore>((set) => ({
-  posts: [],
+  posts: {
+    posts: [],
+  },
   loading: false,
 
   createPost: async (data) => {
@@ -26,12 +31,30 @@ export const usePostStore = create<PostStore>((set) => ({
     try {
       const response = await axios.post("/post/create", data);
 
-      set((prevState) => ({
-        posts: [...prevState.posts, response.data],
+      set((prevState: any) => ({
+        posts: {
+          posts: [...prevState.posts, response.data],
+        },
         loading: false,
       }));
 
       toast.success("Post created successfully!");
+    } catch (error: any) {
+      set({ loading: false });
+      const errorMessage =
+        error.response?.data?.message || "An error occurred.";
+      toast.error(errorMessage);
+    }
+  },
+  getPost: async () => {
+    set({ loading: true });
+    try {
+      const response = await axios.get("/post/getFilter");
+
+      set({
+        posts: response.data,
+        loading: false,
+      });
     } catch (error: any) {
       set({ loading: false });
       const errorMessage =

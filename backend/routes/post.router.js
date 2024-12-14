@@ -14,6 +14,8 @@ router.post(
   postController.createPost
 );
 
+router.get("/getFilter", postController.getPost);
+
 router.post("/reviews", isAuthenticated, postController.reviewPost);
 
 router.post(

@@ -85,7 +85,6 @@ const logout = async (req, res) => {
 };
 
 const getMe = async (req, res) => {
-  console.log(req.user);
   try {
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
 

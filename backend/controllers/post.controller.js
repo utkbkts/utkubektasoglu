@@ -56,6 +56,87 @@ const createPost = async (req, res) => {
   }
 };
 
+const getPost = async (req, res) => {
+  const resPerPage = 5;
+  const { page = 1, search = "" } = req.query;
+  try {
+    const posts = await prisma.post.findMany({
+      where: {
+        deletedAt: null,
+        OR: [
+          {
+            title: {
+              contains: search,
+              mode: "insensitive",
+            },
+          },
+          {
+            categoryHeader: {
+              contains: search,
+              mode: "insensitive",
+            },
+          },
+          {
+            category: {
+              has: search,
+            },
+          },
+        ],
+      },
+      skip: (page - 1) * resPerPage,
+      take: resPerPage,
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        author: true,
+        image: true,
+      },
+    });
+
+    const totalPosts = await prisma.post.count({
+      where: {
+        deletedAt: null,
+        OR: [
+          {
+            title: {
+              contains: search,
+              mode: "insensitive",
+            },
+          },
+          {
+            categoryHeader: {
+              contains: search,
+              mode: "insensitive",
+            },
+          },
+          {
+            category: {
+              has: search,
+            },
+          },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(totalPosts / resPerPage);
+
+    res.status(200).json({
+      success: true,
+      posts,
+      currentPage: Number(page),
+      totalPages,
+      totalPosts,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred on the server.",
+    });
+  }
+};
+
 const reviewPost = async (req, res) => {
   const { rating, comment, productId } = req.body;
 
@@ -160,4 +241,4 @@ const reviewAnswer = async (req, res) => {
   }
 };
 
-export default { createPost, reviewPost, reviewAnswer };
+export default { createPost, reviewPost, reviewAnswer, getPost };

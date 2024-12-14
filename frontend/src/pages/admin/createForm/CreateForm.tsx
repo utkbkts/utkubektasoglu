@@ -59,7 +59,7 @@ const CreateForm = () => {
   };
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="h-full w-full">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <SelectInput
