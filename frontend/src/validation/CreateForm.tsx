@@ -11,6 +11,7 @@ export const createFormData = z.object({
   title: messageIsRequired.max(100),
   description: z.string().min(1),
   category: messageIsRequired.max(100),
+  tags: messageIsRequired.max(100),
 });
 
 export type createData = z.infer<typeof createFormData>;

@@ -16,6 +16,8 @@ router.post(
 
 router.get("/getFilter", postController.getPost);
 
+router.get("/getById/:title/:id", postController.getByPostId);
+
 router.post("/reviews", isAuthenticated, postController.reviewPost);
 
 router.post(

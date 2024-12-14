@@ -24,6 +24,12 @@ const HomePage = () => {
     posts?.posts
       ?.filter((post) => post?.categoryHeader === "blog" && post !== leftPost)
       .slice(0, 4) || [];
+
+  //projects
+
+  const projects = posts?.posts
+    ?.filter((post) => post?.categoryHeader === "project")
+    .slice(0, 6);
   return (
     <div>
       <h1 className="text-2xl font-bold font-body mt-4 border-b border-b-gray-200">
@@ -45,10 +51,9 @@ const HomePage = () => {
         <Button variant={"destructive"}>Popular Projects</Button>
       </div>
       <div className="grid grid-cols-3 gap-4">
-        <PopularProjects />
-        <PopularProjects />
-        <PopularProjects />
-        <PopularProjects />
+        {projects.map((item: any) => (
+          <PopularProjects key={item.id} post={item} />
+        ))}
       </div>
 
       {/* Section Popular Blogs */}

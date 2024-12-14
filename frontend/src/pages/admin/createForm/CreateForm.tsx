@@ -38,6 +38,7 @@ const CreateForm = () => {
       title: "",
       description: "",
       category: "",
+      tags: "",
     },
     mode: "onChange",
   });
@@ -83,11 +84,24 @@ const CreateForm = () => {
             label="Description"
             setValue={form.setValue}
           />
-          <EditProfileInput
+          <SelectInput
             control={form.control}
             name="category"
             label="Category"
-            placeholder="Category örn(React,Next.js)"
+            options={[
+              { value: "React.js", label: "React.js" },
+              { value: "Next.js", label: "Next.js" },
+              { value: "Node.js", label: "Node.js" },
+              { value: "MongoDB", label: "MongoDB" },
+              { value: "PostgreSQL", label: "PostgreSQL" },
+              { value: "Prisma", label: "Prisma" },
+            ]}
+          />
+          <EditProfileInput
+            control={form.control}
+            name="tags"
+            label="Tags"
+            placeholder="Tags "
           />
           <div className="pb-2 pt-2">
             <label className="text-[14px] font-medium text-[#09090b] text-sm px-1">

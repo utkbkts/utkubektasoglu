@@ -18,6 +18,7 @@ interface PostStore {
   loading: boolean;
   createPost: (data: createData & { image: string }) => Promise<void>;
   getPost: () => Promise<void>;
+  getPostById: (params: { title: string; id: any }) => Promise<void>;
 }
 
 export const usePostStore = create<PostStore>((set) => ({
@@ -60,6 +61,22 @@ export const usePostStore = create<PostStore>((set) => ({
       const errorMessage =
         error.response?.data?.message || "An error occurred.";
       toast.error(errorMessage);
+    }
+  },
+  getPostById: async ({ id, title }: { id: any; title: string }) => {
+    set({ loading: true });
+    try {
+      const response = await axios.get(`/post/getById/${title}/${id}`);
+
+      set({
+        posts: response.data.data,
+        loading: false,
+      });
+    } catch (error: any) {
+      console.error(error.message);
+      set({
+        loading: false,
+      });
     }
   },
 }));

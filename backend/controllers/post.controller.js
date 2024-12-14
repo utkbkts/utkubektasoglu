@@ -137,6 +137,48 @@ const getPost = async (req, res) => {
   }
 };
 
+const getByPostId = async (req, res) => {
+  try {
+    const { title, id } = req.params;
+
+    const post = await prisma.post.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        author: true,
+        image: true,
+        reviews: true,
+      },
+    });
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found.",
+      });
+    }
+
+    if (post.title !== title) {
+      return res.status(400).json({
+        success: false,
+        message: "Title does not match the post ID.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: post,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred on the server.",
+    });
+  }
+};
+
 const reviewPost = async (req, res) => {
   const { rating, comment, productId } = req.body;
 
@@ -241,4 +283,4 @@ const reviewAnswer = async (req, res) => {
   }
 };
 
-export default { createPost, reviewPost, reviewAnswer, getPost };
+export default { createPost, reviewPost, reviewAnswer, getPost, getByPostId };

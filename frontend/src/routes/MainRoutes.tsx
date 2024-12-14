@@ -20,7 +20,7 @@ export const MainRoutes = {
       ),
     },
     {
-      path: "/detail/:id",
+      path: "/detail/:title/:id",
       element: (
         <Suspense fallback={<Loading />}>
           <DetailBlog />

@@ -32,14 +32,14 @@ model Post {
   categoryHeader String
   title          String
   description    String
-  category       String[]
+  category       String
   image          PostProfilePic[]
   ratings        Float            @default(0)
   numOfReviews   Int              @default(0)
   authorId       String
   author         User             @relation(fields: [authorId], references: [id])
-
-  reviews Review[]
+  tags           String[]
+  reviews        Review[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
