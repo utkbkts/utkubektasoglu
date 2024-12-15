@@ -1,3 +1,4 @@
+import { blogProduct } from "../data/blogDb.js";
 import { postProduct } from "../data/postDb.js";
 import prisma from "../libs/db.js";
 
@@ -5,7 +6,7 @@ async function seedData() {
   //   await prisma.post.deleteMany({});
   //   console.log("All existing posts have been deleted!");
 
-  const createProductPromises = postProduct.map((product) =>
+  const createProductPromises = blogProduct.map((product) =>
     prisma.post.create({
       data: {
         categoryHeader: product.categoryHeader,

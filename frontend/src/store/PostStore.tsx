@@ -15,9 +15,11 @@ interface PostStore {
   posts: {
     posts: Post[];
   };
+  postsAll: any;
   loading: boolean;
   createPost: (data: createData & { image: string }) => Promise<void>;
-  getPost: (page: any) => Promise<void>;
+  getPostFilter: (page: any) => Promise<void>;
+  getAll: () => Promise<void>;
   getPostById: (params: { title: string; id: any }) => Promise<void>;
 }
 
@@ -25,6 +27,7 @@ export const usePostStore = create<PostStore>((set) => ({
   posts: {
     posts: [],
   },
+  postsAll: [],
   loading: false,
 
   createPost: async (data) => {
@@ -45,7 +48,7 @@ export const usePostStore = create<PostStore>((set) => ({
       set({ loading: false });
     }
   },
-  getPost: async (page: any) => {
+  getPostFilter: async (page: any) => {
     set({ loading: true });
     try {
       const response = await axios.get(`/post/getFilter?page=${page}`);
@@ -68,6 +71,21 @@ export const usePostStore = create<PostStore>((set) => ({
 
       set({
         posts: response.data.data,
+        loading: false,
+      });
+    } catch (error: any) {
+      console.error(error.message);
+      set({
+        loading: false,
+      });
+    }
+  },
+  getAll: async () => {
+    set({ loading: true });
+    try {
+      const response = await axios.get("/post/getAll");
+      set({
+        postsAll: response.data.data,
         loading: false,
       });
     } catch (error: any) {

@@ -19,7 +19,7 @@ interface Props {
 
 const LeftSection = ({ post }: Props) => {
   return (
-    <div className="col-span-2 relative">
+    <div className="col-span-2 relative ">
       <img
         src={post?.image[0]?.url}
         alt="Main"

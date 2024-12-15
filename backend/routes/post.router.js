@@ -20,6 +20,8 @@ router.get("/getById/:title/:id", postController.getByPostId);
 
 router.post("/reviews", isAuthenticated, postController.reviewPost);
 
+router.get("/getAll", postController.getPostAll);
+
 router.post(
   "/review/answer",
   isAuthenticated,

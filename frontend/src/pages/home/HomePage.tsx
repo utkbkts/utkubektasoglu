@@ -11,26 +11,23 @@ import PaginationItems from "@/components/pagination/Pagination";
 import { useSearchParams } from "react-router-dom";
 
 const HomePage = () => {
-  const { posts, getPost } = usePostStore();
+  const { posts, getPostFilter, getAll, postsAll } = usePostStore();
   const [visibleBlogsCount, setVisibleBlogsCount] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
-  useEffect(() => {
-    getPost(Number(page));
-    setCurrentPage(Number(page));
-  }, [getPost, page]);
-
   console.log("🚀 ~ HomePage ~ posts:", posts);
-  const leftPost =
-    posts?.posts?.length > 0 && posts.posts[0].categoryHeader === "blog"
-      ? posts.posts[0]
-      : null;
 
-  const rightPosts =
-    posts?.posts
-      ?.filter((post) => post?.categoryHeader === "blog" && post !== leftPost)
-      .slice(0, 4) || [];
+  useEffect(() => {
+    getPostFilter(Number(page));
+    setCurrentPage(Number(page));
+    getAll();
+  }, [page]);
+
+  const leftPost = postsAll.find((item) => item.categoryHeader === "blog");
+  const rightPosts = postsAll
+    ?.filter((post) => post?.categoryHeader === "blog" && post !== leftPost)
+    .slice(0, 4);
 
   //projects
 
@@ -40,12 +37,12 @@ const HomePage = () => {
 
   // recent blog
   const allRecentBlogs =
-    posts?.posts?.filter((post) => post?.categoryHeader === "blog") || [];
+    postsAll?.filter((post) => post?.categoryHeader === "blog") || [];
 
   const recentBlogs = allRecentBlogs.slice(0, visibleBlogsCount);
 
   const loadMoreBlogs = () => {
-    setVisibleBlogsCount(visibleBlogsCount + 4);
+    setVisibleBlogsCount(visibleBlogsCount + allRecentBlogs.length);
   };
 
   const handlePaginationChange = (pageNumber: number) => {
@@ -58,11 +55,11 @@ const HomePage = () => {
       <h1 className="text-2xl font-bold font-body mt-4 border-b border-b-gray-200">
         Latest Blog
       </h1>
-      <div className="grid grid-cols-3 gap-6 mt-8 max-w-[1024px] mx-auto">
+      <div className="grid grid-cols-3 gap-6 mt-8 max-w-[1024px] mx-auto ">
         {/* Sol Taraf: Tam Ekran Görsel */}
         <LeftSection post={leftPost} />
         {/* Sağ Taraf: Üç Bölümlü Liste */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 ">
           {rightPosts.map((item: any) => (
             <RightSection posts={item} />
           ))}
@@ -99,14 +96,14 @@ const HomePage = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        {/* Left:Blogs List*/}
+        {/* Left:Blogs List */}
         <div className="col-span-2 mt-12">
           <div className="flex flex-col gap-4">
             {recentBlogs.map((item: any) => (
               <RecentBlogsCard key={item.id} post={item} />
             ))}
           </div>
-          {recentBlogs.length > 4 && (
+          {visibleBlogsCount < allRecentBlogs.length && (
             <div className="flex items-center justify-center mt-4">
               <Button
                 size={"md"}

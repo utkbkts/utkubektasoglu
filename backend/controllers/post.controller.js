@@ -72,7 +72,7 @@ const getPost = async (req, res) => {
   try {
     const posts = await prisma.post.findMany({
       where: {
-        deletedAt: null,
+        categoryHeader: "project",
         OR: [
           {
             title: {
@@ -107,7 +107,7 @@ const getPost = async (req, res) => {
 
     const totalPosts = await prisma.post.count({
       where: {
-        deletedAt: null,
+        categoryHeader: "project",
         OR: [
           {
             title: {
@@ -150,10 +150,31 @@ const getPost = async (req, res) => {
   }
 };
 
+const getPostAll = async (req, res) => {
+  try {
+    const post = await prisma.post.findMany({
+      include: {
+        author: true,
+        image: true,
+        reviews: true,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      data: post,
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Server Error", error: error.message });
+  }
+};
+
 const getByPostId = async (req, res) => {
   try {
     const { title, id } = req.params;
-    console.log(title, id);
     const post = await prisma.post.findUnique({
       where: {
         id: id,
@@ -302,4 +323,5 @@ export default {
   reviewAnswer,
   getPost,
   getByPostId,
+  getPostAll,
 };
