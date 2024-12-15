@@ -51,6 +51,7 @@ const CreateForm = () => {
   };
 
   const onSubmit = async (data: any) => {
+    console.log(data);
     try {
       await createPost({ ...data, image });
       toast.success("Form submitted successfully!");

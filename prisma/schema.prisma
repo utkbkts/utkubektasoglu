@@ -38,12 +38,11 @@ model Post {
   numOfReviews   Int              @default(0)
   authorId       String
   author         User             @relation(fields: [authorId], references: [id])
-  tags           String[]
   reviews        Review[]
-
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
+  tags           String[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  deletedAt      DateTime?
 
   @@index([authorId, createdAt])
 }

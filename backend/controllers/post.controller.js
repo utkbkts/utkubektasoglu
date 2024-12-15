@@ -2,9 +2,17 @@ import prisma from "../libs/db.js";
 import { upload_file } from "../utils/cloudinary.js";
 
 const createPost = async (req, res) => {
-  const { title, description, image, category, categoryHeader } = req.body;
+  const { title, description, image, category, categoryHeader, tags } =
+    req.body;
 
-  if (!title || !description || !image || !category || !categoryHeader) {
+  if (
+    !title ||
+    !description ||
+    !image ||
+    !category ||
+    !categoryHeader ||
+    !tags
+  ) {
     return res.status(400).json({ error: "Title and content are required" });
   }
 
@@ -30,8 +38,8 @@ const createPost = async (req, res) => {
 
   let skillsArray = [];
 
-  if (category) {
-    skillsArray = category.split(",").map((skill) => skill.trim());
+  if (tags) {
+    skillsArray = tags.split(",").map((skill) => skill.trim());
   }
 
   try {
@@ -39,7 +47,8 @@ const createPost = async (req, res) => {
       data: {
         title,
         description,
-        category: skillsArray,
+        category,
+        tags: skillsArray,
         image: {
           create: imagesData,
         },
@@ -78,7 +87,7 @@ const getPost = async (req, res) => {
           },
           {
             category: {
-              has: search,
+              in: search,
             },
           },
         ],
@@ -112,7 +121,7 @@ const getPost = async (req, res) => {
           },
           {
             category: {
-              has: search,
+              in: search,
             },
           },
         ],

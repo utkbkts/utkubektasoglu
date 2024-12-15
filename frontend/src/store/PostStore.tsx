@@ -31,6 +31,7 @@ export const usePostStore = create<PostStore>((set) => ({
     set({ loading: true });
     try {
       const response = await axios.post("/post/create", data);
+      console.log("🚀 ~ createPost: ~ data:", data);
 
       set((prevState: any) => ({
         posts: {
@@ -41,10 +42,8 @@ export const usePostStore = create<PostStore>((set) => ({
 
       toast.success("Post created successfully!");
     } catch (error: any) {
+      console.log("🚀 ~ createPost: ~ error:", error);
       set({ loading: false });
-      const errorMessage =
-        error.response?.data?.message || "An error occurred.";
-      toast.error(errorMessage);
     }
   },
   getPost: async () => {
