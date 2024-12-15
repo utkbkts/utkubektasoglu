@@ -295,4 +295,10 @@ const reviewAnswer = async (req, res) => {
   }
 };
 
-export default { createPost, reviewPost, reviewAnswer, getPost, getByPostId };
+export default {
+  createPost,
+  reviewPost,
+  reviewAnswer,
+  getPost,
+  getByPostId,
+};

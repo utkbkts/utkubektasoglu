@@ -15,6 +15,7 @@ interface PostStore {
   posts: {
     posts: Post[];
   };
+  tags: any;
   loading: boolean;
   createPost: (data: createData & { image: string }) => Promise<void>;
   getPost: () => Promise<void>;
@@ -25,6 +26,7 @@ export const usePostStore = create<PostStore>((set) => ({
   posts: {
     posts: [],
   },
+  tags: [],
   loading: false,
 
   createPost: async (data) => {

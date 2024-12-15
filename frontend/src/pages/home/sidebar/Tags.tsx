@@ -1,65 +1,26 @@
 import { Button } from "@/components/ui/button";
 import SidebarTitle from "@/components/ui/title/SidebarTitle";
-
-const CategoryTags = [
-  {
-    id: 1,
-    title: "Health",
-  },
-  {
-    id: 2,
-    title: "Technology",
-  },
-  {
-    id: 3,
-    title: "Education",
-  },
-  {
-    id: 4,
-    title: "Business",
-  },
-  {
-    id: 5,
-    title: "Travel",
-  },
-  {
-    id: 6,
-    title: "Lifestyle",
-  },
-  {
-    id: 7,
-    title: "Sports",
-  },
-  {
-    id: 8,
-    title: "Entertainment",
-  },
-  {
-    id: 9,
-    title: "Food",
-  },
-  {
-    id: 10,
-    title: "Science",
-  },
-  {
-    id: 11,
-    title: "Art",
-  },
-  {
-    id: 12,
-    title: "Environment",
-  },
-];
+import { usePostStore } from "@/store/PostStore";
 
 const Tags = () => {
+  const { posts } = usePostStore();
+  const allTags = posts?.posts?.flatMap((post) => post.tags);
+  const tagsCountMap = new Map();
+  allTags.forEach((tag) => {
+    tagsCountMap.set(tag, (tagsCountMap.get(tag) || 0) + 1);
+  });
+  const tagsArray = [...tagsCountMap.entries()];
+  const tagsObject = Object.values(tagsArray).map(([tag, count]) => ({
+    key: tag,
+    count: count,
+  }));
   return (
     <div className="w-full">
       <SidebarTitle title="Tags" className="py-2" />
-      <div className="gap-4 grid grid-cols-3 mt-4">
-        {CategoryTags.map((item) => (
-          <Button key={item.id} size={"sm"} variant={"outline"}>
-            {item.title}
+      <div className="gap-4 grid grid-cols-2 mt-4">
+        {tagsObject.map((item, index) => (
+          <Button key={index} size={"sm"} variant={"outline"}>
+            {item.key} ({item.count})
           </Button>
         ))}
       </div>
