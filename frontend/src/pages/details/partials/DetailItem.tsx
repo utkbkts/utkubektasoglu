@@ -34,11 +34,13 @@ const DetailItem = ({ post }: Props) => {
 
       {/* Image Section */}
       <div className="text-center mb-6">
-        <img
-          src={post?.image[0]?.url}
-          alt="Augmented Reality"
-          className="max-w-full h-auto rounded-lg"
-        />
+        {post?.image?.length > 0 && (
+          <img
+            src={post?.image[0]?.url}
+            alt="Augmented Reality"
+            className="max-w-full h-auto rounded-lg"
+          />
+        )}
       </div>
 
       {/* Content Section */}

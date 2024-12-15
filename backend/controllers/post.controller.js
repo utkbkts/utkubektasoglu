@@ -1,5 +1,6 @@
 import prisma from "../libs/db.js";
 import { upload_file } from "../utils/cloudinary.js";
+import { generateSlug } from "../utils/slugId.js";
 
 const createPost = async (req, res) => {
   const { title, description, image, category, categoryHeader, tags } =
@@ -87,7 +88,8 @@ const getPost = async (req, res) => {
           },
           {
             category: {
-              in: search,
+              contains: search,
+              mode: "insensitive",
             },
           },
         ],
@@ -121,7 +123,8 @@ const getPost = async (req, res) => {
           },
           {
             category: {
-              in: search,
+              contains: search,
+              mode: "insensitive",
             },
           },
         ],
@@ -149,7 +152,7 @@ const getPost = async (req, res) => {
 const getByPostId = async (req, res) => {
   try {
     const { title, id } = req.params;
-
+    console.log(title, id);
     const post = await prisma.post.findUnique({
       where: {
         id: id,
@@ -168,7 +171,7 @@ const getByPostId = async (req, res) => {
       });
     }
 
-    if (post.title !== title) {
+    if (post && generateSlug(post.title) !== title) {
       return res.status(400).json({
         success: false,
         message: "Title does not match the post ID.",

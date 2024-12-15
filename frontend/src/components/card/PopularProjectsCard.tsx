@@ -1,18 +1,19 @@
 import { Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getDateLocal } from "@/helper/date-format";
+import { generateSlug, getDateLocal } from "@/helper/date-format";
 import { Link } from "react-router-dom";
 const PopularProjects = ({ post }: any) => {
+  const slug = generateSlug(post.title);
   return (
     <Link
-      to={`/detail/${post.title}/${post.id}`}
+      to={`/detail/${slug}/${post.id}`}
       className="mt-4 cursor-pointer hover:shadow-lg overflow-hidden "
     >
       <div className="col-span-2 relative">
         <img
           src={post.image[0].url}
           alt="Main"
-          className="w-full h-full object-cover rounded-lg "
+          className="w-full h-[400px] object-cover rounded-lg "
         />
         <div className="bg-gradient-to-t from-black/60 to-black/20 absolute bottom-0 left-0 w-full h-full z-10"></div>
         <div className="absolute bottom-4 left-2 text-white p-2 rounded-lg  z-10">

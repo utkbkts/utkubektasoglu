@@ -90,12 +90,10 @@ const CreateForm = () => {
             name="category"
             label="Category"
             options={[
-              { value: "React.js", label: "React.js" },
-              { value: "Next.js", label: "Next.js" },
-              { value: "Node.js", label: "Node.js" },
-              { value: "MongoDB", label: "MongoDB" },
-              { value: "PostgreSQL", label: "PostgreSQL" },
-              { value: "Prisma", label: "Prisma" },
+              { value: "Full-Stack", label: "Full-Stack" },
+              { value: "Frontend", label: "Frontend" },
+              { value: "Backend", label: "Backend" },
+              { value: "English", label: "English" },
             ]}
           />
           <EditProfileInput

@@ -50,8 +50,8 @@ const HomePage = () => {
       <div className="bg-[#1F2024] w-full h-full mt-8 rounded-lg">
         <Button variant={"destructive"}>Popular Projects</Button>
       </div>
-      <div className="grid grid-cols-3 gap-4">
-        {projects.map((item: any) => (
+      <div className="grid grid-cols-3 gap-4 ">
+        {projects?.map((item: any) => (
           <PopularProjects key={item.id} post={item} />
         ))}
       </div>
