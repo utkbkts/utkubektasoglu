@@ -15,10 +15,9 @@ interface PostStore {
   posts: {
     posts: Post[];
   };
-  tags: any;
   loading: boolean;
   createPost: (data: createData & { image: string }) => Promise<void>;
-  getPost: () => Promise<void>;
+  getPost: (page: any) => Promise<void>;
   getPostById: (params: { title: string; id: any }) => Promise<void>;
 }
 
@@ -26,14 +25,12 @@ export const usePostStore = create<PostStore>((set) => ({
   posts: {
     posts: [],
   },
-  tags: [],
   loading: false,
 
   createPost: async (data) => {
     set({ loading: true });
     try {
       const response = await axios.post("/post/create", data);
-      console.log("🚀 ~ createPost: ~ data:", data);
 
       set((prevState: any) => ({
         posts: {
@@ -48,10 +45,10 @@ export const usePostStore = create<PostStore>((set) => ({
       set({ loading: false });
     }
   },
-  getPost: async () => {
+  getPost: async (page: any) => {
     set({ loading: true });
     try {
-      const response = await axios.get("/post/getFilter");
+      const response = await axios.get(`/post/getFilter?page=${page}`);
 
       set({
         posts: response.data,

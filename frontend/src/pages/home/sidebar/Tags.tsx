@@ -4,12 +4,17 @@ import { usePostStore } from "@/store/PostStore";
 
 const Tags = () => {
   const { posts } = usePostStore();
-  const allTags = posts?.posts?.flatMap((post) => post.tags);
+
+  const allTags = posts?.posts?.flatMap((post: any) => post.tags);
+
   const tagsCountMap = new Map();
-  allTags.forEach((tag) => {
+
+  allTags?.forEach((tag) => {
     tagsCountMap.set(tag, (tagsCountMap.get(tag) || 0) + 1);
   });
+
   const tagsArray = [...tagsCountMap.entries()];
+
   const tagsObject = Object.values(tagsArray).map(([tag, count]) => ({
     key: tag,
     count: count,

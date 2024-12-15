@@ -67,7 +67,7 @@ const createPost = async (req, res) => {
 };
 
 const getPost = async (req, res) => {
-  const resPerPage = 5;
+  const resPerPage = 6;
   const { page = 1, search = "" } = req.query;
   try {
     const posts = await prisma.post.findMany({
@@ -139,6 +139,7 @@ const getPost = async (req, res) => {
       currentPage: Number(page),
       totalPages,
       totalPosts,
+      resPerPage,
     });
   } catch (error) {
     console.error(error);

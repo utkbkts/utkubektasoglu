@@ -51,7 +51,6 @@ const CreateForm = () => {
   };
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     try {
       await createPost({ ...data, image });
       toast.success("Form submitted successfully!");
@@ -94,6 +93,7 @@ const CreateForm = () => {
               { value: "Frontend", label: "Frontend" },
               { value: "Backend", label: "Backend" },
               { value: "English", label: "English" },
+              { value: "Software", label: "Software" },
             ]}
           />
           <EditProfileInput

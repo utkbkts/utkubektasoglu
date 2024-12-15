@@ -6,15 +6,22 @@ import RecentBlogsCard from "@/components/card/RecentBlogsCard";
 import RightBlogSidebar from "./sidebar/RightBlogSidebar";
 import SidebarTitle from "@/components/ui/title/SidebarTitle";
 import { usePostStore } from "@/store/PostStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import PaginationItems from "@/components/pagination/Pagination";
+import { useSearchParams } from "react-router-dom";
 
 const HomePage = () => {
   const { posts, getPost } = usePostStore();
-
+  const [visibleBlogsCount, setVisibleBlogsCount] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = searchParams.get("page") || "1";
   useEffect(() => {
-    getPost();
-  }, [getPost]);
+    getPost(Number(page));
+    setCurrentPage(Number(page));
+  }, [getPost, page]);
 
+  console.log("🚀 ~ HomePage ~ posts:", posts);
   const leftPost =
     posts?.posts?.length > 0 && posts.posts[0].categoryHeader === "blog"
       ? posts.posts[0]
@@ -27,9 +34,25 @@ const HomePage = () => {
 
   //projects
 
-  const projects = posts?.posts
-    ?.filter((post) => post?.categoryHeader === "project")
-    .slice(0, 6);
+  const projects = posts?.posts?.filter(
+    (post) => post?.categoryHeader === "project"
+  );
+
+  // recent blog
+  const allRecentBlogs =
+    posts?.posts?.filter((post) => post?.categoryHeader === "blog") || [];
+
+  const recentBlogs = allRecentBlogs.slice(0, visibleBlogsCount);
+
+  const loadMoreBlogs = () => {
+    setVisibleBlogsCount(visibleBlogsCount + 4);
+  };
+
+  const handlePaginationChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    setSearchParams({ page: String(pageNumber) });
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold font-body mt-4 border-b border-b-gray-200">
@@ -55,6 +78,14 @@ const HomePage = () => {
           <PopularProjects key={item.id} post={item} />
         ))}
       </div>
+      <div className="flex flex-col items-center justify-center mt-8">
+        <PaginationItems
+          totalItems={posts?.totalPosts}
+          itemsPerPage={posts?.resPerPage}
+          currentPage={currentPage}
+          setCurrentPage={handlePaginationChange}
+        />
+      </div>
 
       {/* Section Popular Blogs */}
       <div className="grid grid-cols-3 gap-2">
@@ -70,12 +101,22 @@ const HomePage = () => {
       <div className="grid grid-cols-3 gap-2">
         {/* Left:Blogs List*/}
         <div className="col-span-2 mt-12">
-          <RecentBlogsCard />
-          <div className="flex items-center justify-center">
-            <Button size={"md"} variant={"destructive"}>
-              Load More
-            </Button>
+          <div className="flex flex-col gap-4">
+            {recentBlogs.map((item: any) => (
+              <RecentBlogsCard key={item.id} post={item} />
+            ))}
           </div>
+          {recentBlogs.length > 4 && (
+            <div className="flex items-center justify-center mt-4">
+              <Button
+                size={"md"}
+                variant={"destructive"}
+                onClick={loadMoreBlogs}
+              >
+                Load More
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Right:Sidebar */}

@@ -18,7 +18,6 @@ interface Props {
 }
 
 const DetailItem = ({ post }: Props) => {
-  console.log("🚀 ~ DetailItem ~ post:", post);
   return (
     <div className="p-6 font-sans">
       {/* Header Section */}

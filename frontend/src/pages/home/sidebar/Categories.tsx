@@ -1,71 +1,32 @@
 import SidebarTitle from "@/components/ui/title/SidebarTitle";
-
-const CategoryTags = [
-  {
-    id: 1,
-    title: "Health",
-  },
-  {
-    id: 2,
-    title: "Technology",
-  },
-  {
-    id: 3,
-    title: "Education",
-  },
-  {
-    id: 4,
-    title: "Business",
-  },
-  {
-    id: 5,
-    title: "Travel",
-  },
-  {
-    id: 6,
-    title: "Lifestyle",
-  },
-  {
-    id: 7,
-    title: "Sports",
-  },
-  {
-    id: 8,
-    title: "Entertainment",
-  },
-  {
-    id: 9,
-    title: "Food",
-  },
-  {
-    id: 10,
-    title: "Science",
-  },
-  {
-    id: 11,
-    title: "Art",
-  },
-  {
-    id: 12,
-    title: "Environment",
-  },
-];
+import { usePostStore } from "@/store/PostStore";
 
 const Categories = () => {
+  const { posts } = usePostStore();
+
+  const allTags = posts?.posts?.flatMap((post) => post.category);
+  const tagsCountMap = new Map();
+  allTags?.forEach((cat) => {
+    tagsCountMap.set(cat, (tagsCountMap.get(cat) || 0) + 1);
+  });
+  const tagsArray = [...tagsCountMap.entries()];
+  const catObject = Object.values(tagsArray).map(([cat, count]) => ({
+    key: cat,
+    count: count,
+  }));
+
   return (
     <div className="w-full">
       <SidebarTitle title="Categories" className="py-2" />
       <div className="gap-4 flex flex-col mt-4">
-        {CategoryTags.map((item, index) => (
+        {catObject.map((item, index) => (
           <span
-            key={item.id}
+            key={index}
             className="flex items-center justify-between w-full"
           >
-            {" "}
-            {item.title}
+            {item.key}
             <span>
-              {" "}
-              ({index + 1}/{CategoryTags.length})
+              ({item.count}/{allTags.length})
             </span>
           </span>
         ))}

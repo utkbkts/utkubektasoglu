@@ -4,13 +4,13 @@ import { getDateLocal } from "@/helper/date-format";
 
 interface Props {
   post: {
-    id: number;
+    id: any;
     title: string;
     image: [{ url: string }];
-    category: string[];
+    category: string;
     createdAt: string;
     author: {
-      id: number;
+      id: any;
       name: string;
     };
     categoryHeader: string;
