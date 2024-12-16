@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import Markdown from "@/components/markdown/Markdown";
 import { getDateLocal } from "@/helper/date-format";
+import Reviews from "./Reviews";
 
 interface Props {
   post: {
@@ -30,7 +31,6 @@ const DetailItem = ({ post }: Props) => {
         </div>
         <Separator className="my-6" />
       </header>
-
       {/* Image Section */}
       <div className="text-center mb-6">
         {post?.image?.length > 0 && (
@@ -41,11 +41,22 @@ const DetailItem = ({ post }: Props) => {
           />
         )}
       </div>
-
       {/* Content Section */}
       <section className="prose prose-lg max-w-none text-gray-800">
         <Markdown>{post?.description}</Markdown>
       </section>
+      <div className="mt-24 overflow-y-auto h-[700px]">
+        <h1 className="text-2xl font-bold font-body">Comments</h1>
+        <Separator className="my-6" />
+        <div className="flex flex-col gap-4  overflow-y-auto">
+          <Reviews reply="Your feedback is valuable to us. Have a great day!" />
+          <Reviews />
+          <Reviews />
+          <Reviews />
+          <Reviews />
+          <Reviews />
+        </div>
+      </div>
     </div>
   );
 };
