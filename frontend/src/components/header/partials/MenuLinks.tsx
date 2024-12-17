@@ -11,7 +11,6 @@ const menuLinks = [
   {
     id: 2,
     title: "Features",
-    url: "/features",
     icon: <ChevronDown />,
     dropDown: {
       menuItems: [
@@ -28,7 +27,6 @@ const menuLinks = [
   {
     id: 3,
     title: "Documentation",
-    url: "/documentation",
     icon: <ChevronDown />,
     dropDown: {
       menuItems: [
@@ -45,7 +43,6 @@ const menuLinks = [
   {
     id: 4,
     title: "Software Languages",
-    url: "/software",
     icon: <ChevronDown />,
     dropDown: {
       menuItems: [
@@ -79,7 +76,10 @@ const MenuLinks = () => {
           onMouseLeave={handleMouseLeave}
           className="relative group "
         >
-          <Link className="text-[#282828] flex items-center" to={item.url}>
+          <Link
+            className="text-[#282828] flex items-center"
+            to={item?.url as any}
+          >
             {item.title}
             {item.icon && <span className="mt-1">{item.icon}</span>}
           </Link>
