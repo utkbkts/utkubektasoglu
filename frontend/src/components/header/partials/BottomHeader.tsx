@@ -2,35 +2,17 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Button } from "@/components/ui/button";
-
-const imageSlider = [
-  {
-    id: 1,
-    img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "iKaty Perry’s Lifestyle Colors Through the Years",
-    category: "Health",
-  },
-  {
-    id: 2,
-    img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "iKaty Perry’s Lifestyle Colors Through the Years",
-    category: "Health",
-  },
-  {
-    id: 3,
-    img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "iKaty Perry’s Lifestyle Colors Through the Years",
-    category: "Health",
-  },
-  {
-    id: 4,
-    img: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "iKaty Perry’s Lifestyle Colors Through the Years",
-    category: "Health",
-  },
-];
+import { usePostStore } from "@/store/PostStore";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { generateSlug } from "@/helper/date-format";
+import { Post } from "@/types/types";
 
 const BottomHeader = () => {
+  const { getAll, postsAll } = usePostStore();
+  useEffect(() => {
+    getAll();
+  }, []);
   const settings = {
     dots: false,
     infinite: true,
@@ -45,10 +27,14 @@ const BottomHeader = () => {
       {...settings}
       className="flex items-center justify-between max-w-[1024px] mx-auto pb-4 pt-4"
     >
-      {imageSlider.map((item) => (
-        <div key={item.id} className="!flex !items-center !gap-2">
+      {postsAll.map((item: Post) => (
+        <Link
+          to={`/detail/${generateSlug(item.title)}/${item.id}`}
+          key={item.id}
+          className="!flex !items-center !gap-2"
+        >
           <img
-            src={item.img}
+            src={item.image?.[0]?.url || ""}
             alt="category"
             title={item.title}
             className="w-12 h-12 object-cover"
@@ -56,8 +42,8 @@ const BottomHeader = () => {
           <Button size={"sm"} variant={"destructive"}>
             {item.category}
           </Button>
-          <span>{item.title}</span>
-        </div>
+          <span>{item.title.slice(0, 40)}...</span>
+        </Link>
       ))}
     </Slider>
   );
