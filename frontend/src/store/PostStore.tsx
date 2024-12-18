@@ -2,6 +2,7 @@ import { create } from "zustand";
 import axios from "@/lib/axios";
 import { toast } from "sonner";
 import { createData } from "@/validation/CreateForm";
+import { createReviewsData } from "@/validation/CreateReviews";
 
 interface Post {
   id: string;
@@ -11,7 +12,13 @@ interface Post {
   categoryHeader: string;
   image?: string[];
 }
-
+interface Review {
+  id: string;
+  comment: string;
+  rating: number;
+  productId: string;
+  createdAt: string;
+}
 interface PostStore {
   posts: {
     posts: Post[];
@@ -22,6 +29,8 @@ interface PostStore {
   loading: boolean;
   postTags: any;
   postTagDetails: any;
+  reviews: Review[];
+  createReviews: (data: createReviewsData) => Promise<void>;
   createPost: (data: createData & { image: string }) => Promise<void>;
   getPostFilter: (page: any) => Promise<void>;
   getAll: () => Promise<void>;
@@ -38,6 +47,7 @@ export const usePostStore = create<PostStore>((set) => ({
   },
   postTags: [],
   postsAll: [],
+  reviews: [],
   postTagDetails: [],
   loading: false,
 
@@ -135,6 +145,26 @@ export const usePostStore = create<PostStore>((set) => ({
       set({
         loading: false,
       });
+    }
+  },
+  createReviews: async (data: createReviewsData) => {
+    set({ loading: true });
+    console.log("🚀 ~ createReviews: ~ data:", data);
+    try {
+      const response = await axios.post("/post/reviews", data);
+
+      set((prevState) => ({
+        reviews: [...prevState.reviews, response.data],
+        loading: false,
+      }));
+
+      toast.success("Review created successfully!");
+    } catch (error: any) {
+      console.error("🚀 ~ createReviews ~ error:", error);
+      set({ loading: false });
+      const errorMessage =
+        error.response?.data?.message || "Failed to create review.";
+      toast.error(errorMessage);
     }
   },
 }));

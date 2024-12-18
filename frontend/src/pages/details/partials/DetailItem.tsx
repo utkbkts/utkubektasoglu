@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import Markdown from "@/components/markdown/Markdown";
 import { getDateLocal } from "@/helper/date-format";
 import Reviews from "./Reviews";
+import ReviewCreate from "./ReviewCreate";
 
 interface Props {
   post: {
@@ -48,13 +49,11 @@ const DetailItem = ({ post }: Props) => {
       <div className="mt-24 overflow-y-auto h-[700px]">
         <h1 className="text-2xl font-bold font-body">Comments</h1>
         <Separator className="my-6" />
+        <div>
+          <ReviewCreate />
+        </div>
         <div className="flex flex-col gap-4  overflow-y-auto">
           <Reviews reply="Your feedback is valuable to us. Have a great day!" />
-          <Reviews />
-          <Reviews />
-          <Reviews />
-          <Reviews />
-          <Reviews />
         </div>
       </div>
     </div>

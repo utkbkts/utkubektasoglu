@@ -38,20 +38,14 @@ export const useUserStore = create<Props>((set, get) => ({
   },
   login: async ({ email, password }: createLoginData) => {
     set({ loading: true });
-
     try {
-      const promiseFunction = axios.post("/auth/login", {
-        email,
-        password,
-      });
-
-      const res = await promiseFunction;
-
-      set({ user: res.data, loading: false });
+      const response = await axios.post("/auth/login", { email, password });
+      console.log("Login successful:", response.data);
+      set({ user: response.data, loading: false });
     } catch (error: any) {
+      console.error("Login error:", error.response?.data || error.message);
       set({ loading: false });
-
-      const errorMessage = error.response?.data?.message;
+      const errorMessage = error.response?.data?.error || "Login failed.";
       toast.error(errorMessage);
     }
   },

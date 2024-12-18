@@ -52,24 +52,18 @@ const login = async (req, res) => {
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) {
-      return res.status(400).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "There is no such email" });
     }
 
     const isPasswordCorrect = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      return res.status(400).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: "Invalid credentials" });
     }
 
     sendToken(user.id, res);
-
-    res.status(200).json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    });
   } catch (error) {
-    console.log("Error in login controller", error.message);
+    console.error("Error in login controller:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

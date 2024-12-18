@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
   FormControl,
   FormField,
@@ -37,7 +38,10 @@ const EditProfileInput = ({
           <FormControl>
             {multiline ? (
               <Textarea
-                className="w-full p-2 border rounded-md resize-none"
+                className={cn(
+                  "w-full p-2 border rounded-md resize-none",
+                  className
+                )}
                 placeholder={placeholder}
                 {...field}
                 rows={6}
