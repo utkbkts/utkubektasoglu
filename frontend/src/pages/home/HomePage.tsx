@@ -16,7 +16,6 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || "1";
-  console.log("🚀 ~ HomePage ~ posts:", posts);
 
   useEffect(() => {
     getPostFilter(Number(page));
@@ -25,6 +24,7 @@ const HomePage = () => {
   }, [page]);
 
   const leftPost = postsAll.find((item) => item.categoryHeader === "blog");
+
   const rightPosts = postsAll
     ?.filter((post) => post?.categoryHeader === "blog" && post !== leftPost)
     .slice(0, 4);

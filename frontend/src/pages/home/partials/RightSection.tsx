@@ -6,7 +6,7 @@ interface Props {
     id: any;
     title: string;
     image: [{ url: string }];
-    category: string[];
+    category: any;
     createdAt: string;
     author: {
       id: any;
@@ -28,7 +28,7 @@ const RightSection = ({ posts }: Props) => {
           />
           <div>
             <Button size={"sm"} variant={"outline"}>
-              {posts.category}
+              {posts?.category[0]?.name}
             </Button>
             <h3 className="text-md font-semibold mt-2">{posts.title}</h3>
             <p className="text-sm text-gray-500">

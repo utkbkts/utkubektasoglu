@@ -22,7 +22,9 @@ async function seedData() {
             })) || [],
         },
         tags: {
-          set: product.tags,
+          create: product.tags.map((tag) => ({
+            name: tag.name,
+          })),
         },
       },
     })

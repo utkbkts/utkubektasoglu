@@ -22,6 +22,10 @@ router.post("/reviews", isAuthenticated, postController.reviewPost);
 
 router.get("/getAll", postController.getPostAll);
 
+router.get("/getTags", postController.getTags);
+
+router.get("/getCategories", postController.getCategories);
+
 router.post(
   "/review/answer",
   isAuthenticated,

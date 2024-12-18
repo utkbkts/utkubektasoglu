@@ -17,9 +17,13 @@ interface PostStore {
   };
   postsAll: any;
   loading: boolean;
+  postTags: any;
+  postCategories: any;
   createPost: (data: createData & { image: string }) => Promise<void>;
   getPostFilter: (page: any) => Promise<void>;
   getAll: () => Promise<void>;
+  getTags: () => Promise<void>;
+  getCategories: () => Promise<void>;
   getPostById: (params: { title: string; id: any }) => Promise<void>;
 }
 
@@ -27,7 +31,9 @@ export const usePostStore = create<PostStore>((set) => ({
   posts: {
     posts: [],
   },
+  postTags: [],
   postsAll: [],
+  postCategories: [],
   loading: false,
 
   createPost: async (data) => {
@@ -86,6 +92,36 @@ export const usePostStore = create<PostStore>((set) => ({
       const response = await axios.get("/post/getAll");
       set({
         postsAll: response.data.data,
+        loading: false,
+      });
+    } catch (error: any) {
+      console.error(error.message);
+      set({
+        loading: false,
+      });
+    }
+  },
+  getTags: async () => {
+    set({ loading: true });
+    try {
+      const response = await axios.get("/post/getTags");
+      set({
+        postTags: response.data.data,
+        loading: false,
+      });
+    } catch (error: any) {
+      console.error(error.message);
+      set({
+        loading: false,
+      });
+    }
+  },
+  getCategories: async () => {
+    set({ loading: true });
+    try {
+      const response = await axios.get("/post/getCategories");
+      set({
+        postCategories: response.data.data,
         loading: false,
       });
     } catch (error: any) {

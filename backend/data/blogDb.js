@@ -13,7 +13,7 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
   {
     categoryHeader: "blog",
@@ -29,7 +29,7 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
   {
     categoryHeader: "blog",
@@ -45,7 +45,7 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
   {
     categoryHeader: "blog",
@@ -61,7 +61,7 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
   {
     categoryHeader: "blog",
@@ -77,7 +77,7 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
   {
     categoryHeader: "blog",
@@ -93,7 +93,7 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
   {
     categoryHeader: "blog",
@@ -109,7 +109,7 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
   {
     categoryHeader: "blog",
@@ -125,6 +125,6 @@ export const blogProduct = [
         url: "https://res.cloudinary.com/dpojqk4ty/image/upload/v1734293825/website/thszv6f3dujl47anrqh6.jpg",
       },
     ],
-    tags: ["English", "Software"],
+    tags: [{ name: "English" }, { name: "Software" }, { name: "Education" }],
   },
 ];

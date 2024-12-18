@@ -69,30 +69,33 @@ const createPost = async (req, res) => {
 const getPost = async (req, res) => {
   const resPerPage = 6;
   const { page = 1, search = "" } = req.query;
+
   try {
     const posts = await prisma.post.findMany({
       where: {
         categoryHeader: "project",
-        OR: [
-          {
-            title: {
-              contains: search,
-              mode: "insensitive",
+        ...(search.trim() && {
+          OR: [
+            {
+              title: {
+                contains: search,
+                mode: "insensitive",
+              },
             },
-          },
-          {
-            categoryHeader: {
-              contains: search,
-              mode: "insensitive",
+            {
+              categoryHeader: {
+                contains: search,
+                mode: "insensitive",
+              },
             },
-          },
-          {
-            category: {
-              contains: search,
-              mode: "insensitive",
+            {
+              category: {
+                contains: search,
+                mode: "insensitive",
+              },
             },
-          },
-        ],
+          ],
+        }),
       },
       skip: (page - 1) * resPerPage,
       take: resPerPage,
@@ -102,32 +105,35 @@ const getPost = async (req, res) => {
       include: {
         author: true,
         image: true,
+        category: true,
       },
     });
 
     const totalPosts = await prisma.post.count({
       where: {
         categoryHeader: "project",
-        OR: [
-          {
-            title: {
-              contains: search,
-              mode: "insensitive",
+        ...(search.trim() && {
+          OR: [
+            {
+              title: {
+                contains: search,
+                mode: "insensitive",
+              },
             },
-          },
-          {
-            categoryHeader: {
-              contains: search,
-              mode: "insensitive",
+            {
+              categoryHeader: {
+                contains: search,
+                mode: "insensitive",
+              },
             },
-          },
-          {
-            category: {
-              contains: search,
-              mode: "insensitive",
+            {
+              category: {
+                contains: search,
+                mode: "insensitive",
+              },
             },
-          },
-        ],
+          ],
+        }),
       },
     });
 
@@ -142,10 +148,11 @@ const getPost = async (req, res) => {
       resPerPage,
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error in getPost:", error);
     res.status(500).json({
       success: false,
       message: "An error occurred on the server.",
+      error: error.message,
     });
   }
 };
@@ -159,7 +166,6 @@ const getPostAll = async (req, res) => {
         reviews: true,
       },
     });
-
     res.status(200).json({
       success: true,
       data: post,
@@ -317,6 +323,34 @@ const reviewAnswer = async (req, res) => {
   }
 };
 
+const getTags = async (req, res) => {
+  try {
+    const tagCounts = await prisma.tag.groupBy({
+      by: ["name"],
+      _count: true,
+    });
+    res.status(200).json({ success: true, data: tagCounts });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Server Error", error: error.message });
+  }
+};
+
+const getCategories = async (req, res) => {
+  try {
+    const categorCounts = await prisma.category.groupBy({
+      by: ["name"],
+      _count: true,
+    });
+    res.status(200).json({ success: true, data: categorCounts });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Server Error", error: error.message });
+  }
+};
+
 export default {
   createPost,
   reviewPost,
@@ -324,4 +358,6 @@ export default {
   getPost,
   getByPostId,
   getPostAll,
+  getTags,
+  getCategories,
 };

@@ -39,12 +39,20 @@ model Post {
   authorId       String
   author         User             @relation(fields: [authorId], references: [id])
   reviews        Review[]
-  tags           String[]
+  tags           Tag[]
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   deletedAt      DateTime?
 
   @@index([authorId, createdAt])
+}
+
+model Tag {
+  id     String  @id @default(cuid())
+  name   String
+  count  Int     @default(0)
+  postId String?
+  Post   Post?   @relation(fields: [postId], references: [id])
 }
 
 model PostProfilePic {
