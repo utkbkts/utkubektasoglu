@@ -24,7 +24,7 @@ router.get("/getAll", postController.getPostAll);
 
 router.get("/getTags", postController.getTags);
 
-router.get("/getCategories", postController.getCategories);
+router.get("/getTagsDetails/:name", postController.getTagsDetails);
 
 router.post(
   "/review/answer",

@@ -11,29 +11,34 @@ interface Post {
   categoryHeader: string;
   image?: string[];
 }
+
 interface PostStore {
   posts: {
     posts: Post[];
+    totalPosts: number;
+    resPerPage: number;
   };
   postsAll: any;
   loading: boolean;
   postTags: any;
-  postCategories: any;
+  postTagDetails: any;
   createPost: (data: createData & { image: string }) => Promise<void>;
   getPostFilter: (page: any) => Promise<void>;
   getAll: () => Promise<void>;
   getTags: () => Promise<void>;
-  getCategories: () => Promise<void>;
   getPostById: (params: { title: string; id: any }) => Promise<void>;
+  getTagsById: (params: { name: string }) => Promise<void>;
 }
 
 export const usePostStore = create<PostStore>((set) => ({
   posts: {
     posts: [],
+    totalPosts: 0,
+    resPerPage: 0,
   },
   postTags: [],
   postsAll: [],
-  postCategories: [],
+  postTagDetails: [],
   loading: false,
 
   createPost: async (data) => {
@@ -41,9 +46,10 @@ export const usePostStore = create<PostStore>((set) => ({
     try {
       const response = await axios.post("/post/create", data);
 
-      set((prevState: any) => ({
+      set((prevState) => ({
         posts: {
-          posts: [...prevState.posts, response.data],
+          ...prevState.posts,
+          posts: [...prevState.posts.posts, response.data],
         },
         loading: false,
       }));
@@ -116,12 +122,12 @@ export const usePostStore = create<PostStore>((set) => ({
       });
     }
   },
-  getCategories: async () => {
+  getTagsById: async ({ name }: { name: string }) => {
     set({ loading: true });
     try {
-      const response = await axios.get("/post/getCategories");
+      const response = await axios.get(`/post/getTagsDetails/${name}`);
       set({
-        postCategories: response.data.data,
+        postTagDetails: response.data.data,
         loading: false,
       });
     } catch (error: any) {

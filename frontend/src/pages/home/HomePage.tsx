@@ -9,6 +9,7 @@ import { usePostStore } from "@/store/PostStore";
 import { useEffect, useState } from "react";
 import PaginationItems from "@/components/pagination/Pagination";
 import { useSearchParams } from "react-router-dom";
+import { Post } from "@/types/types";
 
 const HomePage = () => {
   const { posts, getPostFilter, getAll, postsAll } = usePostStore();
@@ -23,10 +24,14 @@ const HomePage = () => {
     getAll();
   }, [page]);
 
-  const leftPost = postsAll.find((item) => item.categoryHeader === "blog");
+  const leftPost = postsAll.find(
+    (item: Post) => item.categoryHeader === "blog"
+  );
 
   const rightPosts = postsAll
-    ?.filter((post) => post?.categoryHeader === "blog" && post !== leftPost)
+    ?.filter(
+      (post: Post) => post?.categoryHeader === "blog" && post !== leftPost
+    )
     .slice(0, 4);
 
   //projects
@@ -37,7 +42,7 @@ const HomePage = () => {
 
   // recent blog
   const allRecentBlogs =
-    postsAll?.filter((post) => post?.categoryHeader === "blog") || [];
+    postsAll?.filter((post: Post) => post?.categoryHeader === "blog") || [];
 
   const recentBlogs = allRecentBlogs.slice(0, visibleBlogsCount);
 

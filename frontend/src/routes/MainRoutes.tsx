@@ -8,6 +8,7 @@ import BackendDeveloper from "@/pages/developer-fullstack/BackendDeveloper";
 import ReactFundamentals from "@/pages/fundamentals/ReactFundamentals";
 import ApiIntegration from "@/pages/fundamentals/ApiIntegration";
 import DatabaseOptimization from "@/pages/fundamentals/DatabaseOptimization";
+import TagsDetails from "@/pages/TagsDetails/TagsDetails";
 
 const HomePage = React.lazy(() => import("@/pages/home/HomePage"));
 const DetailBlog = React.lazy(() => import("@/pages/details/DetailBlog"));
@@ -78,6 +79,14 @@ export const MainRoutes = {
       element: (
         <Suspense fallback={<Loading />}>
           <DatabaseOptimization />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/tags/:name",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <TagsDetails />
         </Suspense>
       ),
     },

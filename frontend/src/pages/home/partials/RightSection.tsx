@@ -28,7 +28,7 @@ const RightSection = ({ posts }: Props) => {
           />
           <div>
             <Button size={"sm"} variant={"outline"}>
-              {posts?.category[0]?.name}
+              {posts?.category}
             </Button>
             <h3 className="text-md font-semibold mt-2">{posts.title}</h3>
             <p className="text-sm text-gray-500">

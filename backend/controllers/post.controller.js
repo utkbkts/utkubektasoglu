@@ -105,7 +105,6 @@ const getPost = async (req, res) => {
       include: {
         author: true,
         image: true,
-        category: true,
       },
     });
 
@@ -337,17 +336,41 @@ const getTags = async (req, res) => {
   }
 };
 
-const getCategories = async (req, res) => {
+const getTagsDetails = async (req, res) => {
+  const { name } = req.params;
+
   try {
-    const categorCounts = await prisma.category.groupBy({
-      by: ["name"],
-      _count: true,
+    // Use findFirst instead of findUnique since name might not be unique
+    const tag = await prisma.tag.findMany({
+      where: {
+        name,
+      },
+      include: {
+        Post: {
+          select: {
+            image: true,
+            title: true,
+            categoryHeader: true,
+            author: true,
+            description: true,
+            createdAt: true,
+            category: true,
+            id: true,
+          },
+        },
+      },
     });
-    res.status(200).json({ success: true, data: categorCounts });
+
+    if (!tag) {
+      return res.status(404).json({ success: false, message: "Tag not found" });
+    }
+
+    res.status(200).json({ success: true, data: tag });
   } catch (error) {
+    console.error(error);
     return res
       .status(500)
-      .json({ message: "Server Error", error: error.message });
+      .json({ success: false, message: "Server Error", error: error.message });
   }
 };
 
@@ -359,5 +382,5 @@ export default {
   getByPostId,
   getPostAll,
   getTags,
-  getCategories,
+  getTagsDetails,
 };

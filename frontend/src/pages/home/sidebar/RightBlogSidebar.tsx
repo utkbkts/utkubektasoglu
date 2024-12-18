@@ -1,4 +1,3 @@
-import Categories from "./Categories";
 import SocialIcon from "./SocialIcon";
 import Subscribe from "./Subscribe";
 import Tags from "./Tags";
@@ -9,7 +8,6 @@ const RightBlogSidebar = () => {
       <SocialIcon />
       <Subscribe />
       <Tags />
-      <Categories />
     </div>
   );
 };

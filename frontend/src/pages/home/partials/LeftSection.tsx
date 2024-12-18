@@ -28,7 +28,7 @@ const LeftSection = ({ post }: Props) => {
       <div className="bg-gradient-to-t from-black/60 to-black/20 absolute bottom-0 left-0 w-full h-40 z-10"></div>
       <div className="absolute bottom-4 left-4 text-white p-4 rounded-lg  z-10">
         <Button size={"md"} variant={"destructive"}>
-          {post?.category[0]?.name}
+          {post?.category}
         </Button>
         <h3 className="mt-2 text-lg font-semibold">{post?.title}</h3>
         <div className="flex items-center gap-2">
