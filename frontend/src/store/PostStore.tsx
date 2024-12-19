@@ -2,7 +2,6 @@ import { create } from "zustand";
 import axios from "@/lib/axios";
 import { toast } from "sonner";
 import { createData } from "@/validation/CreateForm";
-import { createReviewsData } from "@/validation/CreateReviews";
 
 interface Post {
   id: string;
@@ -30,13 +29,14 @@ interface PostStore {
   postTags: any;
   postTagDetails: any;
   reviews: Review[];
-  createReviews: (data: createReviewsData) => Promise<void>;
+  createReviews: (data: Review) => Promise<void>;
   createPost: (data: createData & { image: string }) => Promise<void>;
   getPostFilter: (page: any) => Promise<void>;
   getAll: () => Promise<void>;
   getTags: () => Promise<void>;
   getPostById: (params: { title: string; id: any }) => Promise<void>;
   getTagsById: (params: { name: string }) => Promise<void>;
+  reviewsGet: (params: { id: any }) => Promise<void>;
 }
 
 export const usePostStore = create<PostStore>((set) => ({
@@ -147,24 +147,31 @@ export const usePostStore = create<PostStore>((set) => ({
       });
     }
   },
-  createReviews: async (data: createReviewsData) => {
+  createReviews: async (data: Review) => {
     set({ loading: true });
-    console.log("🚀 ~ createReviews: ~ data:", data);
     try {
-      const response = await axios.post("/post/reviews", data);
+      await axios.put(`/post/reviews`, data);
 
-      set((prevState) => ({
-        reviews: [...prevState.reviews, response.data],
-        loading: false,
-      }));
-
-      toast.success("Review created successfully!");
+      await usePostStore.getState().reviewsGet({ id: data.productId });
     } catch (error: any) {
-      console.error("🚀 ~ createReviews ~ error:", error);
+      console.log(error.message);
+      toast.error("Failed to submit the review.");
+    } finally {
       set({ loading: false });
-      const errorMessage =
-        error.response?.data?.message || "Failed to create review.";
-      toast.error(errorMessage);
+    }
+  },
+
+  reviewsGet: async ({ id }: any) => {
+    set({ loading: true });
+    try {
+      const response = await axios.get(`/post/reviewsGet/${id}`);
+      set({
+        reviews: response.data.data,
+        loading: false,
+      });
+    } catch (error: any) {
+      set({ loading: false });
+      console.log(error.message);
     }
   },
 }));

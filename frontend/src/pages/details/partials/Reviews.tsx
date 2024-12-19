@@ -1,10 +1,13 @@
+import { getDateLocal } from "@/helper/date-format";
+
 interface Props {
   reply?: string;
+  item: any;
 }
 
-const Reviews = ({ reply }: Props) => {
+const Reviews = ({ reply, item }: Props) => {
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div className=" bg-white  rounded-xl shadow-md overflow-hidden ">
       <div className="md:flex p-4">
         <div className="flex-shrink-0">
           <img
@@ -14,19 +17,26 @@ const Reviews = ({ reply }: Props) => {
           />
         </div>
         <div className="mt-4 md:mt-0 md:ml-4">
-          <h3 className="text-lg font-semibold text-gray-800">John Doe</h3>
-          <p className="mt-2 text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at
-            ex sed neque tincidunt consectetur.
+          <h3 className="text-lg font-semibold text-gray-800">
+            {item?.author?.name}
+          </h3>
+          <p className="text-muted-foreground">
+            {getDateLocal(item?.createdAt)}
           </p>
-          {reply && (
-            <div className="mt-4 bg-gray-100 p-3 rounded-md border-l-4 border-blue-500">
-              <h4 className="text-sm font-semibold text-blue-600">
-                Admin Response
-              </h4>
-              <p className="text-gray-700">{reply}</p>
-            </div>
-          )}
+          <div className="flex items-center text-yellow-500 mb-2 ">
+            {"★".repeat(item?.rating) + "☆".repeat(5 - item?.rating)}
+          </div>
+          <div>
+            <p className="mt-2 text-gray-600 w-[400px]">{item?.comment}</p>
+            {reply && (
+              <div className="mt-4 w-full bg-gray-100 p-3 rounded-md border-l-4 border-blue-500">
+                <h4 className="text-sm font-semibold text-blue-600">
+                  Admin Response
+                </h4>
+                <p className="text-gray-700 w-full">{reply}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

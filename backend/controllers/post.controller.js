@@ -281,6 +281,7 @@ const reviewPost = async (req, res) => {
 
     return res.status(200).json({
       success: true,
+      id: productId,
       message: "Review submitted successfully",
     });
   } catch (error) {
@@ -319,6 +320,25 @@ const reviewAnswer = async (req, res) => {
     return res
       .status(500)
       .json({ error: error.message, message: "Internal server error" });
+  }
+};
+
+const reviewsGet = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const reviews = await prisma.review.findMany({
+      where: {
+        postId: id,
+      },
+      include: {
+        post: true,
+        author: true,
+      },
+    });
+
+    return res.status(200).json({ data: reviews });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -383,4 +403,5 @@ export default {
   getPostAll,
   getTags,
   getTagsDetails,
+  reviewsGet,
 };

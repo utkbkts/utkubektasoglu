@@ -18,13 +18,15 @@ router.get("/getFilter", postController.getPost);
 
 router.get("/getById/:title/:id", postController.getByPostId);
 
-router.post("/reviews", isAuthenticated, postController.reviewPost);
+router.put("/reviews", isAuthenticated, postController.reviewPost);
 
 router.get("/getAll", postController.getPostAll);
 
 router.get("/getTags", postController.getTags);
 
 router.get("/getTagsDetails/:name", postController.getTagsDetails);
+
+router.get("/reviewsGet/:id", postController.reviewsGet);
 
 router.post(
   "/review/answer",

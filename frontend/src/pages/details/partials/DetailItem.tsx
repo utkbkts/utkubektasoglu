@@ -3,6 +3,8 @@ import Markdown from "@/components/markdown/Markdown";
 import { getDateLocal } from "@/helper/date-format";
 import Reviews from "./Reviews";
 import ReviewCreate from "./ReviewCreate";
+import { usePostStore } from "@/store/PostStore";
+import { useEffect } from "react";
 
 interface Props {
   post: {
@@ -20,6 +22,14 @@ interface Props {
 }
 
 const DetailItem = ({ post }: Props) => {
+  const { reviewsGet, reviews } = usePostStore();
+
+  useEffect(() => {
+    if (post?.id) {
+      reviewsGet({ id: post.id });
+    }
+  }, [post?.id, reviewsGet]);
+
   return (
     <div className="p-6 font-sans">
       {/* Header Section */}
@@ -53,7 +63,9 @@ const DetailItem = ({ post }: Props) => {
           <ReviewCreate />
         </div>
         <div className="flex flex-col gap-4  overflow-y-auto">
-          <Reviews reply="Your feedback is valuable to us. Have a great day!" />
+          {reviews.map((item: any) => (
+            <Reviews reply={item?.reply} key={item?.id} item={item} />
+          ))}
         </div>
       </div>
     </div>
