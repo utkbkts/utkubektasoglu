@@ -69,8 +69,8 @@ export function TableUsers() {
     setOpenDropdown(openDropdown === invoiceId ? null : invoiceId);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleAction = (action: string, invoiceId: any) => {
-    console.log(`${action} action triggered for ${invoiceId}`);
     setOpenDropdown(null);
   };
 

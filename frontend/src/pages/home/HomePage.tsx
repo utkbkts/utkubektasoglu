@@ -66,7 +66,7 @@ const HomePage = () => {
         {/* Sağ Taraf: Üç Bölümlü Liste */}
         <div className="lg:flex flex-col gap-6 hidden">
           {rightPosts.map((item: any) => (
-            <RightSection posts={item} />
+            <RightSection posts={item} key={item.id} />
           ))}
         </div>
       </div>

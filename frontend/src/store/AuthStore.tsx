@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "@/lib/axios";
 import { createLoginData } from "@/validation/CreateLogin";
 import { createRegisterData } from "@/validation/CreateRegister";
@@ -40,7 +41,6 @@ export const useUserStore = create<Props>((set) => ({
     set({ loading: true });
     try {
       const response = await axios.post("/auth/login", { email, password });
-      console.log("Login successful:", response.data);
       set({ user: response.data, loading: false });
     } catch (error: any) {
       console.error("Login error:", error.response?.data || error.message);
@@ -68,7 +68,6 @@ export const useUserStore = create<Props>((set) => ({
       set({ user: response.data, checkingAuth: false });
     } catch (error: any) {
       set({ checkingAuth: false, user: null });
-      console.log(error.response.data.message);
     }
   },
 }));

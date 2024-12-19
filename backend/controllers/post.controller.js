@@ -342,6 +342,57 @@ const reviewsGet = async (req, res) => {
   }
 };
 
+const reviewDelete = async (req, res) => {
+  const { productId, reviewId } = req.query;
+  try {
+    const product = await prisma.post.findUnique({
+      where: { id: productId },
+      include: { reviews: true },
+    });
+
+    if (!product) {
+      return res.status(400).json({ error: "Product not found" });
+    }
+
+    const reviews = product.reviews.filter(
+      (review) => review.id.toString() !== reviewId.toString()
+    );
+
+    const reviewsAuthor = reviews.map((item) => item.authorId);
+
+    if (!reviewsAuthor.includes(req.user.id) && req.user.role !== "admin") {
+      return res
+        .status(403)
+        .json({ error: "You are not allowed to delete this review" });
+    }
+
+    const numOfReviews = reviews.length;
+
+    const ratings =
+      numOfReviews === 0
+        ? 0
+        : reviews.reduce((acc, item) => acc + item.rating, 0) / numOfReviews;
+
+    const updatedProduct = await prisma.post.update({
+      where: { id: productId },
+      data: {
+        numOfReviews,
+        ratings,
+      },
+      include: { reviews: true },
+    });
+
+    await prisma.review.delete({
+      where: { id: reviewId },
+    });
+
+    return res.status(200).json({ post: updatedProduct });
+  } catch (error) {
+    console.error("Error in reviewDelete:", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 const getTags = async (req, res) => {
   try {
     const tagCounts = await prisma.tag.groupBy({
@@ -404,4 +455,5 @@ export default {
   getTags,
   getTagsDetails,
   reviewsGet,
+  reviewDelete,
 };

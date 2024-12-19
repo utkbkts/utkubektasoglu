@@ -2,13 +2,30 @@ import React, { Suspense } from "react";
 import Loading from "@/components/Loading";
 import NotFound from "@/components/NotFound";
 import MainLayouts from "@/layouts/MainLayouts";
-import FullStackDeveloper from "@/pages/developer-fullstack/FullStackDeveloper";
-import FrontEndDeveloper from "@/pages/developer-fullstack/FrontendDeveloper";
-import BackendDeveloper from "@/pages/developer-fullstack/BackendDeveloper";
-import ReactFundamentals from "@/pages/fundamentals/ReactFundamentals";
-import ApiIntegration from "@/pages/fundamentals/ApiIntegration";
-import DatabaseOptimization from "@/pages/fundamentals/DatabaseOptimization";
-import TagsDetails from "@/pages/TagsDetails/TagsDetails";
+
+const FullStackDeveloper = React.lazy(
+  () => import("@/pages/developer-fullstack/FullStackDeveloper")
+);
+const FrontEndDeveloper = React.lazy(
+  () => import("@/pages/developer-fullstack/FrontendDeveloper")
+);
+const BackendDeveloper = React.lazy(
+  () => import("@/pages/developer-fullstack/BackendDeveloper")
+);
+const ReactFundamentals = React.lazy(
+  () => import("@/pages/fundamentals/ReactFundamentals")
+);
+const ApiIntegration = React.lazy(
+  () => import("@/pages/fundamentals/ApiIntegration")
+);
+const DatabaseOptimization = React.lazy(
+  () => import("@/pages/fundamentals/DatabaseOptimization")
+);
+const TagsDetails = React.lazy(() => import("@/pages/TagsDetails/TagsDetails"));
+const Golang = React.lazy(() => import("@/pages/programmers/Go"));
+const Python = React.lazy(() => import("@/pages/programmers/Python"));
+const Typescript = React.lazy(() => import("@/pages/programmers/Typescript"));
+const Javascript = React.lazy(() => import("@/pages/programmers/Javascript"));
 
 const HomePage = React.lazy(() => import("@/pages/home/HomePage"));
 const DetailBlog = React.lazy(() => import("@/pages/details/DetailBlog"));
@@ -96,6 +113,38 @@ export const MainRoutes = {
       element: (
         <Suspense fallback={<Loading />}>
           <Auth />
+        </Suspense>
+      ),
+    },
+    {
+      path: "javascript",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Javascript />
+        </Suspense>
+      ),
+    },
+    {
+      path: "typescript",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Typescript />
+        </Suspense>
+      ),
+    },
+    {
+      path: "python",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Python />
+        </Suspense>
+      ),
+    },
+    {
+      path: "go",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Golang />
         </Suspense>
       ),
     },

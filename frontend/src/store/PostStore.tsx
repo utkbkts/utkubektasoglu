@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from "zustand";
 import axios from "@/lib/axios";
 import { toast } from "sonner";
@@ -37,6 +38,10 @@ interface PostStore {
   getPostById: (params: { title: string; id: any }) => Promise<void>;
   getTagsById: (params: { name: string }) => Promise<void>;
   reviewsGet: (params: { id: any }) => Promise<void>;
+  reviewsDelete: (params: {
+    productId: number;
+    reviewId: any;
+  }) => Promise<void>;
 }
 
 export const usePostStore = create<PostStore>((set) => ({
@@ -66,7 +71,6 @@ export const usePostStore = create<PostStore>((set) => ({
 
       toast.success("Post created successfully!");
     } catch (error: any) {
-      console.log("🚀 ~ createPost: ~ error:", error);
       set({ loading: false });
     }
   },
@@ -153,8 +157,7 @@ export const usePostStore = create<PostStore>((set) => ({
       await axios.put(`/post/reviews`, data);
 
       await usePostStore.getState().reviewsGet({ id: data.productId });
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (_error: any) {
       toast.error("Failed to submit the review.");
     } finally {
       set({ loading: false });
@@ -171,7 +174,20 @@ export const usePostStore = create<PostStore>((set) => ({
       });
     } catch (error: any) {
       set({ loading: false });
-      console.log(error.message);
+    }
+  },
+  reviewsDelete: async ({ productId, reviewId }: any) => {
+    set({ loading: true });
+    try {
+      const response = await axios.delete(
+        `/post/reviews/delete?productId=${productId}&reviewId=${reviewId}`
+      );
+      set({
+        reviews: response.data.data,
+        loading: false,
+      });
+    } catch (error: any) {
+      set({ loading: false });
     }
   },
 }));

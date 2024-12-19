@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 
 const UserMenu = () => {
   const { user, logout } = useUserStore();
-  console.log("🚀 ~ UserMenu ~ user:", user);
 
   const handleLogout = async () => {
     await logout();

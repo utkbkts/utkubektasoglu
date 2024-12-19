@@ -1,11 +1,23 @@
 import { getDateLocal } from "@/helper/date-format";
+import { useUserStore } from "@/store/AuthStore";
+import { usePostStore } from "@/store/PostStore";
+import { Trash } from "lucide-react";
 
 interface Props {
   reply?: string;
   item: any;
+  postId: any;
 }
 
-const Reviews = ({ reply, item }: Props) => {
+const Reviews = ({ reply, item, postId }: Props) => {
+  const { reviewsDelete } = usePostStore();
+  const { user } = useUserStore();
+  const handleDelete = async (id: any) => {
+    await reviewsDelete({ reviewId: id, productId: postId });
+  };
+
+  const reviewMe = user?.id === item?.author?.id;
+
   return (
     <div className=" bg-white  rounded-xl shadow-md overflow-hidden ">
       <div className="md:flex p-4">
@@ -17,12 +29,21 @@ const Reviews = ({ reply, item }: Props) => {
           />
         </div>
         <div className="mt-4 md:mt-0 md:ml-4">
-          <h3 className="text-lg font-semibold text-gray-800">
-            {item?.author?.name}
-          </h3>
-          <p className="text-muted-foreground">
-            {getDateLocal(item?.createdAt)}
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800">
+                {item?.author?.name}
+              </h3>
+              <p className="text-muted-foreground">
+                {getDateLocal(item?.createdAt)}
+              </p>
+            </div>
+            {reviewMe && (
+              <div onClick={() => handleDelete(item?.id)}>
+                <Trash className="w-6 h-6 text-gray-500 cursor-pointer" />
+              </div>
+            )}
+          </div>
           <div className="flex items-center text-yellow-500 mb-2 ">
             {"★".repeat(item?.rating) + "☆".repeat(5 - item?.rating)}
           </div>

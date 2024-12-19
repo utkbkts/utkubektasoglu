@@ -28,6 +28,8 @@ router.get("/getTagsDetails/:name", postController.getTagsDetails);
 
 router.get("/reviewsGet/:id", postController.reviewsGet);
 
+router.delete("/reviews/delete", isAuthenticated, postController.reviewDelete);
+
 router.post(
   "/review/answer",
   isAuthenticated,

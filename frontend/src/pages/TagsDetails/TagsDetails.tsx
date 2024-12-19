@@ -27,7 +27,10 @@ const TagsDetails = () => {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {postTagDetails.map((item: any) => (
-          <Card className="w-full shadow-lg rounded-lg overflow-hidden bg-white transition-transform transform hover:scale-105">
+          <Card
+            key={item.id}
+            className="w-full shadow-lg rounded-lg overflow-hidden bg-white transition-transform transform hover:scale-105"
+          >
             <Link
               to={`/detail/${generateSlug(item.Post.title)}/${item.Post.id}`}
               className="block"

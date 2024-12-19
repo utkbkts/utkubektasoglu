@@ -48,8 +48,13 @@ const DetailItem = ({ post }: any) => {
           <ReviewCreate />
         </div>
         <div className="flex flex-col gap-4  overflow-y-auto">
-          {reviews.map((item: any) => (
-            <Reviews reply={item?.reply} key={item?.id} item={item} />
+          {reviews?.map((item: any) => (
+            <Reviews
+              reply={item?.reply}
+              key={item?.id}
+              item={item}
+              postId={post.id}
+            />
           ))}
         </div>
       </div>
