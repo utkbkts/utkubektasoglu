@@ -4,7 +4,6 @@ import path from "path";
 import compression from "compression";
 import dotenv from "dotenv";
 import cors from "cors";
-import helmet from "helmet";
 import {
   gracefulShutdown,
   unexpectedErrorHandler,
@@ -26,8 +25,6 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 //compress response
 app.use(compression());
-//CSRF
-app.use(helmet());
 
 //cors
 app.use(
