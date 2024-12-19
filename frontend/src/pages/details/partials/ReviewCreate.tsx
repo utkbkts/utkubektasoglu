@@ -12,6 +12,7 @@ import StarRatings from "react-star-ratings";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+
 const ReviewCreate = () => {
   const { createReviews } = usePostStore();
   const [rating, setRating] = useState(0);
@@ -32,13 +33,12 @@ const ReviewCreate = () => {
   };
 
   const onSubmit = async (data: createReviewsData) => {
-    const dataReview = {
+    const dataReview: any = {
       ...data,
       rating,
       productId,
     };
     try {
-      console.log(dataReview);
       await createReviews(dataReview);
       toast.success("Comment sent successfully!");
       form.reset();

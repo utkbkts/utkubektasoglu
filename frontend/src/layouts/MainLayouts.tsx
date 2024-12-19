@@ -5,7 +5,7 @@ const MainLayouts = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col min-h-screen container mx-auto md:max-w-[1024px]">
+      <div className="flex flex-col min-h-screen container mx-auto mds:max-w-[1024px]">
         <div className="flex-grow ">
           <Outlet />
         </div>

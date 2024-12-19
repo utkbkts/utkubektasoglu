@@ -60,11 +60,11 @@ const HomePage = () => {
       <h1 className="text-2xl font-bold font-body mt-4 border-b border-b-gray-200">
         Latest Blog
       </h1>
-      <div className="grid grid-cols-3 gap-6 mt-8 max-w-[1024px] mx-auto ">
+      <div className="lg:grid grid-cols-3 gap-6 mt-8 max-w-[1024px] mx-auto ">
         {/* Sol Taraf: Tam Ekran Görsel */}
         <LeftSection post={leftPost} />
         {/* Sağ Taraf: Üç Bölümlü Liste */}
-        <div className="flex flex-col gap-6 ">
+        <div className="lg:flex flex-col gap-6 hidden">
           {rightPosts.map((item: any) => (
             <RightSection posts={item} />
           ))}
@@ -75,7 +75,7 @@ const HomePage = () => {
       <div className="bg-[#1F2024] w-full h-full mt-8 rounded-lg">
         <Button variant={"destructive"}>Popular Projects</Button>
       </div>
-      <div className="grid grid-cols-3 gap-4 ">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 ">
         {projects?.map((item: any) => (
           <PopularProjects key={item.id} post={item} />
         ))}
@@ -90,17 +90,19 @@ const HomePage = () => {
       </div>
 
       {/* Section Popular Blogs */}
-      <div className="grid grid-cols-3 gap-2">
-        <div className="bg-[#1F2024] col-span-2 h-full mt-8 rounded-lg flex items-center justify-between px-4">
+      <div className="lg:grid grid-cols-3 gap-2">
+        <div className="bg-[#1F2024] col-span-2 h-full mt-8 rounded-lg flex items-center justify-between lg:px-4">
           <Button variant={"destructive"}>Recent Blogs</Button>
-          <Button size={"sm"} variant={"destructive"}>
+          <Button size={"sm"} variant={"destructive"} className="lg:py-0 py-4">
             Show More
           </Button>
         </div>
-        <SidebarTitle title="Social Plugin" />
+        <div className="lg:block hidden">
+          <SidebarTitle title="Social Plugin" />
+        </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="lg:grid grid-cols-3 gap-2">
         {/* Left:Blogs List */}
         <div className="col-span-2 mt-12">
           <div className="flex flex-col gap-4">
@@ -122,7 +124,7 @@ const HomePage = () => {
         </div>
 
         {/* Right:Sidebar */}
-        <div className="mt-12">
+        <div className="mt-12 lg:block hidden">
           <RightBlogSidebar />
         </div>
       </div>

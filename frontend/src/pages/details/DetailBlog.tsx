@@ -15,13 +15,13 @@ const DetailBlog = () => {
   }, [params.title, params.id, getPostById]);
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="lg:grid grid-cols-3 gap-2">
       {/* Left:Blogs List*/}
       <div className="col-span-2 mt-12">
         <DetailItem post={posts} />
       </div>
       {/* Right:Sidebar */}
-      <div className="mt-12">
+      <div className="mt-12 lg:block hidden">
         <RightBlogSidebar />
       </div>
     </div>

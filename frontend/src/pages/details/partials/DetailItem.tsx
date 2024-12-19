@@ -6,22 +6,7 @@ import ReviewCreate from "./ReviewCreate";
 import { usePostStore } from "@/store/PostStore";
 import { useEffect } from "react";
 
-interface Props {
-  post: {
-    id: number;
-    title: string;
-    image: [{ url: string }];
-    category: string[];
-    createdAt: string;
-    author: {
-      id: number;
-      name: string;
-    };
-    description: string;
-  };
-}
-
-const DetailItem = ({ post }: Props) => {
+const DetailItem = ({ post }: any) => {
   const { reviewsGet, reviews } = usePostStore();
 
   useEffect(() => {

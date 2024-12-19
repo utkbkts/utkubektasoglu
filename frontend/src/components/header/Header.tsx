@@ -23,9 +23,9 @@ const Header = () => {
   const onSubmit = () => {};
 
   return (
-    <div className="border-b border-b-gray-200">
+    <div className="border-b border-b-gray-200 w-full">
       <TopBar />
-      <div className="flex items-center justify-between max-w-[1024px] mx-auto ">
+      <div className="flex  items-center justify-between max-w-[1024px] mx-auto ">
         <div>
           <h1 className="uppercase text-2xl font-bold font-heading italic pt-4">
             Software <span className="text-[#E21228]">Developer</span>
@@ -36,7 +36,7 @@ const Header = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-1/2 px-4 relative"
+              className="w-1/2 px-4 relative mds:block hidden"
             >
               <EditProfileInput
                 control={form.control}
@@ -48,12 +48,12 @@ const Header = () => {
             </form>
           </Form>
         ) : (
-          <div className="gap-4 flex items-center font-semibold ">
+          <div className="gap-4  items-center font-semibold mds:flex hidden">
             <MenuLinks />
           </div>
         )}
 
-        <div>
+        <div className="mds:flex hidden">
           <Search
             size={20}
             className="cursor-pointer mt-1"
@@ -61,7 +61,9 @@ const Header = () => {
           />
         </div>
       </div>
-      <BottomHeader />
+      <div className="mds:block hidden">
+        <BottomHeader />
+      </div>
     </div>
   );
 };

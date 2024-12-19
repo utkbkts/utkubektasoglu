@@ -25,7 +25,7 @@ const BottomHeader = () => {
   return (
     <Slider
       {...settings}
-      className="flex items-center justify-between max-w-[1024px] mx-auto pb-4 pt-4"
+      className="flex items-center justify-between mds:max-w-[1024px] mx-auto pb-4 pt-4"
     >
       {postsAll.map((item: Post) => (
         <Link

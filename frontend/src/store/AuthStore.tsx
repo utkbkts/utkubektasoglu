@@ -13,8 +13,7 @@ interface Props {
   checkAuth: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const useUserStore = create<Props>((set, get) => ({
+export const useUserStore = create<Props>((set) => ({
   user: null,
   loading: false,
   checkingAuth: true,

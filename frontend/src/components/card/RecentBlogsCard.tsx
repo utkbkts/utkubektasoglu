@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 const RecentBlogsCard = ({ post }: any) => {
   const slug = generateSlug(post.title);
   return (
-    <Link to={`/detail/${slug}/${post.id}`} className="flex ">
+    <Link
+      to={`/detail/${slug}/${post.id}`}
+      className="flex sm:flex-row flex-col"
+    >
       <div className="relative w-full">
         <img
           src={post?.image[0]?.url}
