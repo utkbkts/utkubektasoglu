@@ -49,6 +49,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) {
@@ -62,9 +63,18 @@ const login = async (req, res) => {
     }
 
     sendToken(user.id, res);
+    return res.status(200).json({
+      success: true,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (error) {
     console.error("Error in login controller:", error.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -90,6 +100,7 @@ const getMe = async (req, res) => {
       id: user.id,
       name: user.name,
       email: user.email,
+      role: user.role,
     });
   } catch (error) {
     console.log("Error in getMe controller", error.message);

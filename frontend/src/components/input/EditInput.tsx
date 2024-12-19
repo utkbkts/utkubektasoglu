@@ -55,7 +55,7 @@ const EditProfileInput = ({
               />
             )}
           </FormControl>
-          <FormMessage className="absolute text-red-500 text-sm mt-1 left-4 -bottom-4" />
+          <FormMessage />
         </FormItem>
       )}
     />

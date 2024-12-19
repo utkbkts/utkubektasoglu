@@ -120,7 +120,6 @@ function Login() {
   const onSubmit = async (data: createLoginData) => {
     try {
       await login(data);
-      toast.success("Login successful!");
     } catch (err: any) {
       toast.error(err.message || "An error occurred during login.");
     }

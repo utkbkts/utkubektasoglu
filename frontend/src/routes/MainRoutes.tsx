@@ -12,6 +12,7 @@ import TagsDetails from "@/pages/TagsDetails/TagsDetails";
 
 const HomePage = React.lazy(() => import("@/pages/home/HomePage"));
 const DetailBlog = React.lazy(() => import("@/pages/details/DetailBlog"));
+const Auth = React.lazy(() => import("@/pages/auth/Auth"));
 
 export const MainRoutes = {
   path: "/",
@@ -87,6 +88,14 @@ export const MainRoutes = {
       element: (
         <Suspense fallback={<Loading />}>
           <TagsDetails />
+        </Suspense>
+      ),
+    },
+    {
+      path: "auth",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Auth />
         </Suspense>
       ),
     },

@@ -9,9 +9,9 @@ import MenuLinks from "./partials/MenuLinks";
 import { searchData, searchMessageData } from "@/validation/SearchSchema";
 import BottomHeader from "./partials/BottomHeader";
 
+import UserMenu from "./partials/UserMenu";
 const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
-
   const form = useForm<searchData>({
     resolver: zodResolver(searchMessageData),
     defaultValues: {
@@ -59,6 +59,9 @@ const Header = () => {
             className="cursor-pointer mt-1"
             onClick={() => setSearchOpen(!searchOpen)}
           />
+        </div>
+        <div>
+          <UserMenu />
         </div>
       </div>
       <div className="mds:block hidden">

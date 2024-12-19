@@ -1,15 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useUserStore } from "@/store/AuthStore";
-import { Navigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 type Role = "user" | "admin";
 
-export const AdminLoaders = async (requiredRole: Role) => {
+export const AdminLoaders = (requiredRole: Role) => {
   const { user } = useUserStore.getState();
 
-  if (!user || user.role !== requiredRole) {
-    return <Navigate to={"/"} />;
+  if (!user) {
+    return redirect("/");
   }
 
-  return user; // Yetkili kullanıcıyı döndürün
+  if (user.role !== requiredRole) {
+    return redirect("/unauthorized");
+  }
+
+  return user;
 };

@@ -10,6 +10,7 @@ interface Props {
   checkingAuth: boolean;
   signup: (data: createRegisterData) => Promise<void>;
   login: (data: createLoginData) => Promise<void>;
+  logout: () => Promise<void>;
   checkAuth: () => void;
 }
 
@@ -48,7 +49,18 @@ export const useUserStore = create<Props>((set) => ({
       toast.error(errorMessage);
     }
   },
-
+  logout: async () => {
+    set({ loading: true });
+    try {
+      await axios.post("/auth/logout");
+      set({ user: null, loading: false });
+      toast.success("Logout successful.");
+    } catch (error: any) {
+      set({ loading: false });
+      const errorMessage = error.response?.data?.error || "Logout failed.";
+      toast.error(errorMessage);
+    }
+  },
   checkAuth: async () => {
     set({ checkingAuth: true });
     try {
