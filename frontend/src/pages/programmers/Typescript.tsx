@@ -36,22 +36,33 @@ fruits.forEach(fruit => {
 });`,
   };
 
-  const [copySuccess, setCopySuccess] = useState<boolean>(false);
+  const [copyStatus, setCopyStatus] = useState<Record<string, boolean>>({});
 
-  const handleCopy = (text: string): void => {
+  const handleCopy = (text: string, snippetName: string): void => {
     navigator.clipboard.writeText(text).then(() => {
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      setCopyStatus((prevStatus) => ({
+        ...prevStatus,
+        [snippetName]: true,
+      }));
+      setTimeout(() => {
+        setCopyStatus((prevStatus) => ({
+          ...prevStatus,
+          [snippetName]: false,
+        }));
+      }, 2000);
     });
   };
 
-  const renderCodeBlock = (codeString: string): JSX.Element => (
+  const renderCodeBlock = (
+    codeString: string,
+    snippetName: string
+  ): JSX.Element => (
     <div style={{ position: "relative" }}>
       <SyntaxHighlighter language="typescript" style={atomOneDark}>
         {codeString}
       </SyntaxHighlighter>
       <button
-        onClick={() => handleCopy(codeString)}
+        onClick={() => handleCopy(codeString, snippetName)}
         style={{
           position: "absolute",
           top: "2px",
@@ -64,7 +75,7 @@ fruits.forEach(fruit => {
           cursor: "pointer",
         }}
       >
-        {copySuccess ? "Copied!" : "Copy"}
+        {copyStatus[snippetName] ? "Copied!" : "Copy"}
       </button>
     </div>
   );
@@ -82,31 +93,31 @@ TypeScript is a superset of JavaScript that introduces optional static typing. I
 In TypeScript, variables are explicitly typed, meaning you declare their type at the time of assignment. TypeScript supports various data types such as strings, numbers, booleans, arrays, etc.
         `}
       </Markdown>
-      {renderCodeBlock(codeSnippets.variables)}
+      {renderCodeBlock(codeSnippets.variables, "variables")}
       <Markdown>
         {`# **Functions**
 
 Functions in TypeScript are blocks of reusable code. They are strongly typed, meaning you can specify parameter and return types. Here's an example of a function that takes a string and returns a greeting message:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.functions)}
+      {renderCodeBlock(codeSnippets.functions, "functions")}
       <Markdown>
         {`# **Loops**
 
 TypeScript supports several loop constructs, including the traditional \`for\` loop. Here's an example of a loop that prints numbers from 0 to 4:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.loops)}
+      {renderCodeBlock(codeSnippets.loops, "loops")}
       <Markdown>
         {`# **Conditionals**
 
 Conditionals in TypeScript work similarly to JavaScript. Here's an example of a simple \`if\` statement that checks if a number is greater than 5:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.conditionals)}
+      {renderCodeBlock(codeSnippets.conditionals, "conditionals")}
       <Markdown>
         {`# **Lists**
 
 Lists (arrays) in TypeScript can store multiple values of a specific type. Here’s an example of an array of strings and how to iterate over it:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.lists)}
+      {renderCodeBlock(codeSnippets.lists, "lists")}
     </div>
   );
 };

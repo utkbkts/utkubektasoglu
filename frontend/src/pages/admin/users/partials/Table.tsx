@@ -70,7 +70,7 @@ export function TableUsers() {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleAction = (action: string, invoiceId: any) => {
+  const handleAction = (_action: string, _invoiceId: any) => {
     setOpenDropdown(null);
   };
 

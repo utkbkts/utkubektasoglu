@@ -1,3 +1,4 @@
+import { FooterComponents } from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import { Outlet } from "react-router-dom";
 
@@ -10,7 +11,9 @@ const MainLayouts = () => {
           <Outlet />
         </div>
       </div>
-      footer
+      <div className="mt-12 mb-12">
+        <FooterComponents />
+      </div>
     </div>
   );
 };

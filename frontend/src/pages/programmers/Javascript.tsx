@@ -25,22 +25,33 @@ if (num > 5) {
 fruits.forEach(fruit => console.log(fruit));`,
   };
 
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<Record<string, boolean>>({});
 
-  const handleCopy = (text: string) => {
+  const handleCopy = (text: string, snippetName: string): void => {
     navigator.clipboard.writeText(text).then(() => {
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      setCopyStatus((prevStatus) => ({
+        ...prevStatus,
+        [snippetName]: true,
+      }));
+      setTimeout(() => {
+        setCopyStatus((prevStatus) => ({
+          ...prevStatus,
+          [snippetName]: false,
+        }));
+      }, 2000);
     });
   };
 
-  const renderCodeBlock = (codeString: any) => (
+  const renderCodeBlock = (
+    codeString: string,
+    snippetName: string
+  ): JSX.Element => (
     <div style={{ position: "relative" }}>
       <SyntaxHighlighter language="javascript" style={atomOneDark}>
         {codeString}
       </SyntaxHighlighter>
       <button
-        onClick={() => handleCopy(codeString)}
+        onClick={() => handleCopy(codeString, snippetName)}
         style={{
           position: "absolute",
           top: "2px",
@@ -53,7 +64,7 @@ fruits.forEach(fruit => console.log(fruit));`,
           cursor: "pointer",
         }}
       >
-        {copySuccess ? "Copied!" : "Copy"}
+        {copyStatus[snippetName] ? "Copied!" : "Copy"}
       </button>
     </div>
   );
@@ -71,31 +82,32 @@ JavaScript is one of the most popular and versatile programming languages in the
 JavaScript supports multiple data types like strings, numbers, objects, arrays, and more. Variables can be declared using \`var\`, \`let\`, or \`const\`.
         `}
       </Markdown>
-      {renderCodeBlock(codeSnippets.variables)}
+      {renderCodeBlock(codeSnippets.variables, "variables")}
       <Markdown>
         {`# **Functions**
 
 Functions in JavaScript allow you to encapsulate logic and reuse it throughout your application.`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.functions)}
+      {renderCodeBlock(codeSnippets.functions, "functions")}
       <Markdown>
         {`# **Loops**
 
 Loops allow you to perform repetitive tasks efficiently. Here is an example of a \`for\` loop:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.loops)}
+      {renderCodeBlock(codeSnippets.loops, "loops")}
+
       <Markdown>
         {`# **Conditionals**
 
 Conditionals are used to perform different actions based on different conditions. Here's an example:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.conditionals)}
+      {renderCodeBlock(codeSnippets.conditionals, "conditionals")}
       <Markdown>
         {`# **Arrays**
 
 Arrays in JavaScript are used to store multiple values in a single variable. Here's an example of iterating over an array:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.arrays)}
+      {renderCodeBlock(codeSnippets.arrays, "arrays")}
     </div>
   );
 };

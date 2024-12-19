@@ -48,22 +48,33 @@ func main() {
 }`,
   };
 
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<Record<string, boolean>>({});
 
-  const handleCopy = (text: string) => {
+  const handleCopy = (text: string, snippetName: string): void => {
     navigator.clipboard.writeText(text).then(() => {
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      setCopyStatus((prevStatus) => ({
+        ...prevStatus,
+        [snippetName]: true,
+      }));
+      setTimeout(() => {
+        setCopyStatus((prevStatus) => ({
+          ...prevStatus,
+          [snippetName]: false,
+        }));
+      }, 2000);
     });
   };
 
-  const renderCodeBlock = (codeString: any) => (
+  const renderCodeBlock = (
+    codeString: string,
+    snippetName: string
+  ): JSX.Element => (
     <div style={{ position: "relative" }}>
       <SyntaxHighlighter language="go" style={atomOneDark}>
         {codeString}
       </SyntaxHighlighter>
       <button
-        onClick={() => handleCopy(codeString)}
+        onClick={() => handleCopy(codeString, snippetName)}
         style={{
           position: "absolute",
           top: "2px",
@@ -76,7 +87,7 @@ func main() {
           cursor: "pointer",
         }}
       >
-        {copySuccess ? "Copied!" : "Copy"}
+        {copyStatus[snippetName] ? "Copied!" : "Copy"}
       </button>
     </div>
   );
@@ -94,31 +105,31 @@ Go (or Golang) is a statically typed, compiled programming language designed for
 Go supports various data types like strings, integers, floats, booleans, and arrays. Variables must be explicitly declared with types or inferred using the short declaration operator.
         `}
       </Markdown>
-      {renderCodeBlock(codeSnippets.variables)}
+      {renderCodeBlock(codeSnippets.variables, "variables")}
       <Markdown>
         {`# **Functions**
 
 Functions in Go allow you to encapsulate logic for reuse. Here's an example:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.functions)}
+      {renderCodeBlock(codeSnippets.functions, "functions")}
       <Markdown>
         {`# **Loops**
 
 Loops in Go are simple and efficient. Here's an example of a \`for\` loop:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.loops)}
+      {renderCodeBlock(codeSnippets.loops, "loops")}
       <Markdown>
         {`# **Conditionals**
 
 Go uses \`if\` statements for conditionals. Here's an example:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.conditionals)}
+      {renderCodeBlock(codeSnippets.conditionals, "conditionals")}
       <Markdown>
         {`# **Arrays**
 
 Arrays and slices in Go are used to store collections of elements. Here's an example of iterating over a slice:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.arrays)}
+      {renderCodeBlock(codeSnippets.arrays, "arrays")}
     </div>
   );
 };

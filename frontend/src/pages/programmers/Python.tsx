@@ -24,22 +24,33 @@ for fruit in fruits:
     print(fruit)`,
   };
 
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<Record<string, boolean>>({});
 
-  const handleCopy = (text: string) => {
+  const handleCopy = (text: string, snippetName: string): void => {
     navigator.clipboard.writeText(text).then(() => {
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      setCopyStatus((prevStatus) => ({
+        ...prevStatus,
+        [snippetName]: true,
+      }));
+      setTimeout(() => {
+        setCopyStatus((prevStatus) => ({
+          ...prevStatus,
+          [snippetName]: false,
+        }));
+      }, 2000);
     });
   };
 
-  const renderCodeBlock = (codeString: any) => (
+  const renderCodeBlock = (
+    codeString: string,
+    snippetName: string
+  ): JSX.Element => (
     <div style={{ position: "relative" }}>
       <SyntaxHighlighter language="python" style={atomOneDark}>
         {codeString}
       </SyntaxHighlighter>
       <button
-        onClick={() => handleCopy(codeString)}
+        onClick={() => handleCopy(codeString, snippetName)}
         style={{
           position: "absolute",
           top: "2px",
@@ -52,7 +63,7 @@ for fruit in fruits:
           cursor: "pointer",
         }}
       >
-        {copySuccess ? "Copied!" : "Copy"}
+        {copyStatus[snippetName] ? "Copied!" : "Copy"}
       </button>
     </div>
   );
@@ -70,31 +81,31 @@ Python is a powerful and beginner-friendly programming language that is widely u
 Python supports multiple data types like strings, integers, floats, lists, and more. Variables are dynamically typed and can be declared without specifying the type.
         `}
       </Markdown>
-      {renderCodeBlock(codeSnippets.variables)}
+      {renderCodeBlock(codeSnippets.variables, "variables")}
       <Markdown>
         {`# **Functions**
 
 Functions in Python are blocks of reusable code that perform a specific task. Here's an example of a simple function:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.functions)}
+      {renderCodeBlock(codeSnippets.functions, "functions")}
       <Markdown>
         {`# **Loops**
 
 Python provides several ways to iterate over data, including \`for\` and \`while\` loops. Here's an example:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.loops)}
+      {renderCodeBlock(codeSnippets.loops, "loops")}
       <Markdown>
         {`# **Conditionals**
 
 Conditionals in Python allow you to execute code based on conditions. Here's an example:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.conditionals)}
+      {renderCodeBlock(codeSnippets.conditionals, "conditionals")}
       <Markdown>
         {`# **Lists**
 
 Lists in Python are versatile and can store multiple values. Here's an example of iterating over a list:`}
       </Markdown>
-      {renderCodeBlock(codeSnippets.lists)}
+      {renderCodeBlock(codeSnippets.lists, "lists")}
     </div>
   );
 };
