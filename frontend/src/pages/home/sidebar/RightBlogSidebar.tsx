@@ -4,7 +4,7 @@ import Tags from "./Tags";
 
 const RightBlogSidebar = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center sticky top-12">
       <SocialIcon />
       <Subscribe />
       <Tags />

@@ -12,7 +12,6 @@ import { toast } from "sonner";
 
 const CreateForm = () => {
   const [image, setImages] = useState("");
-
   const { createPost } = usePostStore();
 
   const FileInputRef = useRef<HTMLInputElement>(null);

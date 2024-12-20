@@ -97,7 +97,7 @@ const HomePage = () => {
             Show More
           </Button>
         </div>
-        <div className="lg:block hidden">
+        <div className="lg:flex hidden w-full">
           <SidebarTitle title="Social Plugin" />
         </div>
       </div>

@@ -13,6 +13,7 @@ router.post(
   authorizeRoles("admin"),
   postController.createPost
 );
+router.put("/update/:id", isAuthenticated, postController.updatePost);
 
 router.get("/getFilter", postController.getPost);
 

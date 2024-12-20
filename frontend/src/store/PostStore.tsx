@@ -34,6 +34,7 @@ interface PostStore {
   reviewsAnswer: ReviewAnswer[];
   createReviews: (data: Review) => Promise<void>;
   createPost: (data: createData & { image: string }) => Promise<void>;
+  updatePost: (data: any & { id: any }) => Promise<void>;
   getPostFilter: (page: any) => Promise<void>;
   getAll: () => Promise<void>;
   getTags: () => Promise<void>;
@@ -181,7 +182,27 @@ export const usePostStore = create<PostStore>((set) => ({
       console.log(error.message);
     }
   },
+  updatePost: async ({ data, id }) => {
+    set({ loading: true });
+    try {
+      const response = await axios.put(`/post/update/${id}`, data);
 
+      set((prevState) => ({
+        posts: {
+          ...prevState.posts,
+          posts: prevState.posts.posts.map((post) =>
+            post.id === id ? { ...post, ...response.data } : post
+          ),
+        },
+        loading: false,
+      }));
+
+      toast.success("Updated successfully!");
+    } catch (error: any) {
+      set({ loading: false });
+      toast.error(error.message);
+    }
+  },
   reviewsGet: async ({ id }: any) => {
     set({ loading: true });
     try {

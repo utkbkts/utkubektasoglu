@@ -67,6 +67,82 @@ const createPost = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, image, category, categoryHeader, tags } =
+      req.body;
+
+    const existingPost = await prisma.post.findUnique({
+      where: { id: id },
+    });
+
+    if (!existingPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    let imagesData = [];
+    if (image) {
+      const picsArray = Array.isArray(image) ? image : [image];
+      try {
+        const uploadPromises = picsArray.map((img) =>
+          upload_file(img, "website")
+        );
+        const urls = await Promise.all(uploadPromises);
+        imagesData = urls.map((urlData) => ({
+          public_id: urlData.public_id,
+          url: urlData.url,
+        }));
+      } catch (error) {
+        return res
+          .status(400)
+          .json({ error: "Error with image upload", error: error.message });
+      }
+    }
+
+    let tagsArray = [];
+    if (tags) {
+      tagsArray = tags.split(",").map((tag) => tag.trim());
+    }
+
+    const existingTags = await prisma.tag.findMany({
+      where: { name: { in: tagsArray } },
+    });
+    const newTags = tagsArray.filter(
+      (tag) => !existingTags.some((t) => t.name === tag)
+    );
+
+    const updatedPost = await prisma.$transaction(async (prisma) => {
+      const postUpdate = prisma.post.update({
+        where: { id: id },
+        data: {
+          title,
+          description,
+          category,
+          tags: {
+            create: newTags.map((tag) => ({ name: tag })),
+            connect: existingTags.map((tag) => ({ id: tag.id })),
+          },
+          image: {
+            create: imagesData,
+          },
+          categoryHeader,
+          authorId: req.user.id,
+        },
+      });
+      return postUpdate;
+    });
+
+    return res
+      .status(200)
+      .json({ message: "Post updated successfully", post: updatedPost });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Server Error", error: error.message });
+  }
+};
+
 const getPost = async (req, res) => {
   const resPerPage = 6;
   const { page = 1, search = "" } = req.query;
@@ -460,4 +536,5 @@ export default {
   getTagsDetails,
   reviewsGet,
   reviewDelete,
+  updatePost,
 };

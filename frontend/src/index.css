@@ -118,3 +118,7 @@ body {
   background-size: cover;
   height: 300px;
 }
+
+.markdown > * {
+  all: revert;
+}

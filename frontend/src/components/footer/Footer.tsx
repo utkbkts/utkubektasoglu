@@ -19,7 +19,7 @@ export function FooterComponents() {
             <div>
               <Footer.Title title="about" />
               <Footer.LinkGroup col>
-                <Footer.Link href="#">Me</Footer.Link>
+                <Footer.Link href="/me/about">Me</Footer.Link>
                 <Footer.Link href="#">S.S.S</Footer.Link>
               </Footer.LinkGroup>
             </div>
@@ -48,7 +48,7 @@ export function FooterComponents() {
         </div>
         <Footer.Divider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <Footer.Copyright by="Utku Toygun" year={2024} />
+          <Footer.Copyright by="" year={2024} />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon
               href="https://github.com/utkbkts"

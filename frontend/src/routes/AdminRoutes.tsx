@@ -39,6 +39,14 @@ export const AdminRoutes = {
       ),
     },
     {
+      path: "create/:title/:id",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <CreateForm />
+        </Suspense>
+      ),
+    },
+    {
       path: "users",
       element: (
         <Suspense fallback={<Loading />}>

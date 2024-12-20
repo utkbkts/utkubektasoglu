@@ -10,7 +10,6 @@ import { useUserStore } from "@/store/AuthStore";
 const DetailItem = ({ post }: any) => {
   const { reviewsGet, reviews } = usePostStore();
   const { user } = useUserStore();
-
   useEffect(() => {
     if (post?.id) {
       reviewsGet({ id: post.id });
@@ -52,14 +51,18 @@ const DetailItem = ({ post }: any) => {
           </div>
         )}
         <div className="flex flex-col gap-4  overflow-y-auto">
-          {reviews?.map((item: any) => (
-            <Reviews
-              reply={item?.reply}
-              key={item?.id}
-              item={item}
-              postId={post.id}
-            />
-          ))}
+          {reviews.length > 0 ? (
+            reviews?.map((item: any) => (
+              <Reviews
+                reply={item?.reply}
+                key={item?.id}
+                item={item}
+                postId={post.id}
+              />
+            ))
+          ) : (
+            <div className="text-center text-gray-500">No reviews yet</div>
+          )}
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ const DetailBlog = () => {
         <DetailItem post={posts} />
       </div>
       {/* Right:Sidebar */}
-      <div className="mt-12 lg:block hidden">
+      <div className="mt-12 lg:block hidden ">
         <RightBlogSidebar />
       </div>
     </div>
