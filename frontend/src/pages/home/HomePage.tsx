@@ -10,9 +10,10 @@ import { useEffect, useState } from "react";
 import PaginationItems from "@/components/pagination/Pagination";
 import { useSearchParams } from "react-router-dom";
 import { Post } from "@/types/types";
+import { SkeletonCard } from "@/components/skeleton/Skeleton";
 
 const HomePage = () => {
-  const { posts, getPostFilter, getAll, postsAll } = usePostStore();
+  const { posts, getPostFilter, getAll, postsAll, loading } = usePostStore();
   const [visibleBlogsCount, setVisibleBlogsCount] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -62,12 +63,20 @@ const HomePage = () => {
       </h1>
       <div className="lg:grid grid-cols-3 gap-6 mt-8 max-w-[1024px] mx-auto ">
         {/* Sol Taraf: Tam Ekran Görsel */}
-        <LeftSection post={leftPost} />
+        {loading ? (
+          <SkeletonCard classNameSlider="w-full h-[500px] object-cover" />
+        ) : (
+          <LeftSection post={leftPost} />
+        )}
         {/* Sağ Taraf: Üç Bölümlü Liste */}
         <div className="lg:flex flex-col gap-6 hidden">
-          {rightPosts.map((item: any) => (
-            <RightSection posts={item} key={item.id} />
-          ))}
+          {loading ? (
+            <SkeletonCard />
+          ) : (
+            rightPosts.map((item: any) => (
+              <RightSection posts={item} key={item.id} />
+            ))
+          )}
         </div>
       </div>
 
@@ -76,9 +85,13 @@ const HomePage = () => {
         <Button variant={"destructive"}>Popular Projects</Button>
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 ">
-        {projects?.map((item: any) => (
-          <PopularProjects key={item.id} post={item} />
-        ))}
+        {loading
+          ? projects?.map(() => (
+              <SkeletonCard classNameSlider="w-full h-[400px] object-cover rounded-lg " />
+            ))
+          : projects?.map((item: any) => (
+              <PopularProjects key={item.id} post={item} />
+            ))}
       </div>
       <div className="flex flex-col items-center justify-center mt-8">
         <PaginationItems
@@ -106,9 +119,13 @@ const HomePage = () => {
         {/* Left:Blogs List */}
         <div className="col-span-2 mt-12">
           <div className="flex flex-col gap-4">
-            {recentBlogs.map((item: any) => (
-              <RecentBlogsCard key={item.id} post={item} />
-            ))}
+            {loading
+              ? recentBlogs?.map(() => (
+                  <SkeletonCard classNameSlider="w-[280px] h-[210px] object-cover rounded-lg " />
+                ))
+              : recentBlogs.map((item: any) => (
+                  <RecentBlogsCard key={item.id} post={item} />
+                ))}
           </div>
           {visibleBlogsCount < allRecentBlogs.length && (
             <div className="flex items-center justify-center mt-4">
