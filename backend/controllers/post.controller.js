@@ -361,7 +361,7 @@ const reviewDelete = async (req, res) => {
       (review) => review.id.toString() !== reviewId.toString()
     );
 
-    const reviewsAuthor = reviews.map((item) => item.authorId);
+    const reviewsAuthor = product.reviews.map((item) => item.authorId);
 
     if (!reviewsAuthor.includes(req.user.id) && req.user.role !== "admin") {
       return res
