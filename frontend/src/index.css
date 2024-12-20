@@ -110,3 +110,11 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.img-fluid {
+  background-image: url("/slider-bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+}
