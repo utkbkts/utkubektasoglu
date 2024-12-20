@@ -56,7 +56,7 @@ const Dashboard = () => {
             <img src="/me.png" alt="me" />
           </div>
         </div>
-        <div className=" flex flex-col mt-8">
+        <div className=" flex flex-col mt-8 ">
           <div className="flex space-y-2 flex-col text-center mb-14">
             <span className="md:text-5xl text-xl font-bold">
               Skill that i have
@@ -166,14 +166,14 @@ const Dashboard = () => {
               Typescript
             </div>
           </Marquee>
-          <div className="mt-32">
-            <div className="bg-[#2C2C37] text-sm text-muted-foreground w-full p-2 flex md:flex-row flex-col items-center justify-between py-4">
-              <span className="">© 2024 All Rights Reserved.</span>
-              <div>
-                <span className="select-all">
-                  Email:utkutoygunbektasoglu@gmail.com
-                </span>
-              </div>
+        </div>
+        <div className="mt-80">
+          <div className="bg-[#2C2C37] text-sm text-muted-foreground w-full p-2 flex md:flex-row flex-col items-center justify-between py-4">
+            <span className="">© 2024 All Rights Reserved.</span>
+            <div>
+              <span className="select-all">
+                Email:utkutoygunbektasoglu@gmail.com
+              </span>
             </div>
           </div>
         </div>

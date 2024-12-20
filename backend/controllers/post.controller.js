@@ -334,6 +334,9 @@ const reviewsGet = async (req, res) => {
         post: true,
         author: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return res.status(200).json({ data: reviews });

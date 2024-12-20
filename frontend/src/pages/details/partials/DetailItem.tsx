@@ -5,9 +5,11 @@ import Reviews from "./Reviews";
 import ReviewCreate from "./ReviewCreate";
 import { usePostStore } from "@/store/PostStore";
 import { useEffect } from "react";
+import { useUserStore } from "@/store/AuthStore";
 
 const DetailItem = ({ post }: any) => {
   const { reviewsGet, reviews } = usePostStore();
+  const { user } = useUserStore();
 
   useEffect(() => {
     if (post?.id) {
@@ -44,9 +46,11 @@ const DetailItem = ({ post }: any) => {
       <div className="mt-24 overflow-y-auto h-[700px]">
         <h1 className="text-2xl font-bold font-body">Comments</h1>
         <Separator className="my-6" />
-        <div>
-          <ReviewCreate />
-        </div>
+        {user && (
+          <div>
+            <ReviewCreate />
+          </div>
+        )}
         <div className="flex flex-col gap-4  overflow-y-auto">
           {reviews?.map((item: any) => (
             <Reviews

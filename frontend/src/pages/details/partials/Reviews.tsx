@@ -1,7 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { getDateLocal } from "@/helper/date-format";
 import { useUserStore } from "@/store/AuthStore";
 import { usePostStore } from "@/store/PostStore";
 import { Trash } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
   reply?: string;
@@ -10,10 +12,20 @@ interface Props {
 }
 
 const Reviews = ({ reply, item, postId }: Props) => {
-  const { reviewsDelete } = usePostStore();
+  const { reviewsDelete, replyReviews } = usePostStore();
   const { user } = useUserStore();
+  const [replyContent, setReplyContent] = useState("");
+
   const handleDelete = async (id: any) => {
     await reviewsDelete({ reviewId: id, productId: postId });
+  };
+
+  const handleReply = async () => {
+    try {
+      await replyReviews({ reply: replyContent, reviewId: item?.id });
+    } catch (error) {
+      console.error("Failed to add reply:", error);
+    }
   };
 
   const reviewMe = user?.id === item?.author?.id;
@@ -55,6 +67,20 @@ const Reviews = ({ reply, item, postId }: Props) => {
                   Admin Response
                 </h4>
                 <p className="text-gray-700 w-full">{reply}</p>
+              </div>
+            )}
+            {user?.role === "admin" && !reply && (
+              <div className="mt-4">
+                <textarea
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                  placeholder="Reply to the review"
+                  rows={3}
+                  onChange={(e) => setReplyContent(e.target.value)}
+                  value={replyContent}
+                ></textarea>
+                <Button onClick={handleReply} type="submit">
+                  Submit
+                </Button>
               </div>
             )}
           </div>

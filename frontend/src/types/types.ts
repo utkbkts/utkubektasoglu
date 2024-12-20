@@ -41,3 +41,9 @@ export interface Review {
   postId: string;
   createdAt: string;
 }
+
+export interface ReviewAnswer {
+  id?: any;
+  reviewId: string;
+  reply: string;
+}

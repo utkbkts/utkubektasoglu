@@ -28,7 +28,7 @@ const Auth = () => {
     return <Navigate to="/" />;
   }
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-[80vh] bg-gray-100">
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>{authModal ? "Sign Up" : "Sign In"}</CardTitle>

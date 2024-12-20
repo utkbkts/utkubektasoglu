@@ -3,6 +3,7 @@ import { create } from "zustand";
 import axios from "@/lib/axios";
 import { toast } from "sonner";
 import { createData } from "@/validation/CreateForm";
+import { ReviewAnswer } from "@/types/types";
 
 interface Post {
   id: string;
@@ -30,6 +31,7 @@ interface PostStore {
   postTags: any;
   postTagDetails: any;
   reviews: Review[];
+  reviewsAnswer: ReviewAnswer[];
   createReviews: (data: Review) => Promise<void>;
   createPost: (data: createData & { image: string }) => Promise<void>;
   getPostFilter: (page: any) => Promise<void>;
@@ -38,6 +40,7 @@ interface PostStore {
   getPostById: (params: { title: string; id: any }) => Promise<void>;
   getTagsById: (params: { name: string }) => Promise<void>;
   reviewsGet: (params: { id: any }) => Promise<void>;
+  replyReviews: (params: ReviewAnswer) => Promise<void>;
   reviewsDelete: (params: {
     productId: number;
     reviewId: any;
@@ -53,6 +56,7 @@ export const usePostStore = create<PostStore>((set) => ({
   postTags: [],
   postsAll: [],
   reviews: [],
+  reviewsAnswer: [],
   postTagDetails: [],
   loading: false,
 
@@ -161,6 +165,20 @@ export const usePostStore = create<PostStore>((set) => ({
       toast.error("Failed to submit the review.");
     } finally {
       set({ loading: false });
+    }
+  },
+  replyReviews: async ({ reply, reviewId }: ReviewAnswer) => {
+    try {
+      const response = await axios.post(`/post/review/answer`, {
+        reply,
+        reviewId,
+      });
+      set({
+        reviewsAnswer: response.data.data,
+        loading: false,
+      });
+    } catch (error: any) {
+      console.log(error.message);
     }
   },
 
