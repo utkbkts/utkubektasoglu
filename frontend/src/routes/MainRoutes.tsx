@@ -31,6 +31,8 @@ const HomePage = React.lazy(() => import("@/pages/home/HomePage"));
 const DetailBlog = React.lazy(() => import("@/pages/details/DetailBlog"));
 const Auth = React.lazy(() => import("@/pages/auth/Auth"));
 
+const Contact = React.lazy(() => import("@/pages/contact/Contact"));
+
 export const MainRoutes = {
   path: "/",
   element: <MainLayouts />,
@@ -145,6 +147,14 @@ export const MainRoutes = {
       element: (
         <Suspense fallback={<Loading />}>
           <Golang />
+        </Suspense>
+      ),
+    },
+    {
+      path: "contact",
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Contact />
         </Suspense>
       ),
     },
