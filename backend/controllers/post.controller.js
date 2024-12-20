@@ -37,10 +37,9 @@ const createPost = async (req, res) => {
     }
   }
 
-  let skillsArray = [];
-
+  let tagsArray = [];
   if (tags) {
-    skillsArray = tags.split(",").map((skill) => skill.trim());
+    tagsArray = tags.split(",").map((tag) => tag.trim());
   }
 
   try {
@@ -49,7 +48,9 @@ const createPost = async (req, res) => {
         title,
         description,
         category,
-        tags: skillsArray,
+        tags: {
+          create: tagsArray.map((tag) => ({ name: tag })),
+        },
         image: {
           create: imagesData,
         },
